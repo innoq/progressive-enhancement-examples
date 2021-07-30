@@ -1,0 +1,25 @@
+extends ../layout.pug
+include ../mixins/navbar.pug
+
+block head
+	title Complaints
+
+block header
+	+navbar('complaints')
+
+block content
+	h1 Complaints
+	ul
+		each complaint in complaints
+			li
+				a(href="/complaints/" + complaint.id)
+					span=complaint.message
+					if complaint.status
+						=" "
+						small="(" + complaint.status + ")"
+	h2 Create a new complaint
+	form(action="/complaints/", method="post", enctype="application/x-www-form-urlencoded")
+		label(for="complaint") Complaint
+		input(id="complaint", name="message")
+		input(type="submit")
+

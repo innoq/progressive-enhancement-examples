@@ -1,0 +1,36 @@
+extends ../layout.pug
+include ../mixins/navbar.pug
+
+block head
+	title Update Payment Information
+
+block header
+	+navbar
+	nav
+		a(href="/payments") Payments
+		| >
+		a(href="/payments/" + id) Payment for #{receiver}
+		| >
+		a(href="/payments/" + id + "/edit", aria-current="page") Update Payment Information
+
+block content
+	h1 Update Payment Information
+	form(method="post", action=("/payments/" + id), enctype="application/x-www-form-urlencoded")
+		input(type="hidden", name="_method", value="patch")
+		input(type="hidden", name="action", value="choose")
+		if origin
+			input(type="hidden", name="origin", value=origin)
+		if type === "IBAN"
+			label(for="iban") IBAN
+			input(id="iban", type="text", name="iban" required)
+		if type === "Credit Card"
+			label(for="cardnr") Credit Card Number
+			input(id="cardnr", type="text", name="cardnr", required)
+			label(for="expiryMonth") Month of Expiry
+			input(id="expiryMonth", name="expiryMonth", type="number", placeholder="MM", required)
+			label(for="expiryYear") Year of Expiry
+			input(id="expiryYear", name="expiryYear", type="number", placeholder="YY", required)
+			label(for="cvc") CVC
+			input(id="cvc", name="cvc", type="number", required)
+		input(type="submit")
+

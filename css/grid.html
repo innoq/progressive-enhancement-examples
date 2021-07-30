@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: grid;
+        grid-template-areas:
+          "header header"
+          "sidebar main"
+          "footer footer";
+        grid-template-columns: 10rem 1fr;
+        grid-template-rows: auto 1fr auto;
+
+        margin: 0;
+        padding: 0.5rem;
+        min-height: 100vh;
+      }
+
+      header, main, aside, footer {
+        display: block;
+        border: 2px solid black;
+        background-color: white;
+        padding: 0.5rem;
+      }
+
+      body > main {
+        grid-area: main;
+      }
+
+      body > header {
+        grid-area: header;
+        position: sticky;
+        top: 0;
+      }
+
+      body > aside {
+        grid-area: sidebar;
+        position: sticky;
+        left: 0;
+        top: var(--header-height);
+        max-height: calc(100vh - var(--header-height) - var(--footer-height));
+      }
+
+      body > footer {
+        grid-area: footer;
+        position: sticky;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      Header
+    </header>
+    <main>
+      Main content
+    </main>
+    <aside>
+      Sidebar
+    </aside>
+    <footer>
+      Footer
+    </footer>
+  </body>
+</html>

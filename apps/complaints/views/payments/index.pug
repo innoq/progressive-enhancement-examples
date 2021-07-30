@@ -1,0 +1,17 @@
+extends ../layout.pug
+include ../mixins/navbar.pug
+
+block head
+	title Payments
+
+block header
+	+navbar('payments')
+
+block content
+	h1 Payments
+	ul
+		each payment in payments
+			li
+				a(href="/payments/" + payment.id)=payment.receiver + ", " + payment.type
+	form(method="post", action="/payments/")
+		button(type="submit") Create New Payment

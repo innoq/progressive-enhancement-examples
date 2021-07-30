@@ -1,0 +1,29 @@
+extends ../layout.pug
+include ../mixins/navbar.pug
+
+block head
+	title Payment: #{id}
+
+block header
+	+navbar
+	nav
+		a(href="/payments") Payments
+		| >
+		a(href="/payments/" + id, aria-current="page") Payment for #{receiver}
+
+block content
+	h1 Payment
+	h2 Receiver
+	p=receiver
+	h2 Payment Details
+	dl
+		dt Type
+		dd=type
+		if type === "IBAN"
+			dt IBAN
+			dd=value
+		else if type === "Credit Card"
+			dt Credit Card Number
+			dd=value
+			dt Expiry
+			dd=expiryMonth + "/" + expiryYear

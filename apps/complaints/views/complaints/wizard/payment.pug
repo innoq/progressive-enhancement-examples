@@ -1,0 +1,29 @@
+extends ../../layout.pug
+include ../../mixins/navbar.pug
+
+block head
+	title Choose Response for: #{id}
+
+block header
+	+navbar
+	nav
+		a(href="/") Complaints
+		| >
+		a(href="/complaints/" + id) Complaint: #{message}
+		| >
+		a(href="/complaints/" + id + "/wizard?action=reimburse", aria-current="page") Reimbursement
+
+block content
+	h1 Reimburse payment for complaint
+	p=message
+	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
+		input(type="hidden", name="_method", value="put")
+		input(type="hidden", name="action", value="reimburse")
+		label
+		select(name="payment")
+			each payment in payments
+				option(value=payment.id)=payment.receiver + ', ' + payment.type
+		input(type="submit")
+	form(method="post", action="/payments/")
+		input(type="hidden", name="origin", value="/complaints/" + id + "/wizard?action=reimburse")
+		button(type="submit") Create New Payment

@@ -1,0 +1,7 @@
+mixin navbar(current)
+	nav
+		ul
+			li
+				a(href="/", aria-current=(current === 'complaints' ? 'page' : false)) Complaints
+			li
+				a(href="/payments/", aria-current=(current === 'payments' ? 'page' : false)) Payments

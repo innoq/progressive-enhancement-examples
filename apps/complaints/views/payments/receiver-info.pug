@@ -1,0 +1,30 @@
+extends ../layout.pug
+include ../mixins/navbar.pug
+
+block head
+	title Input Payment Information
+
+block header
+	+navbar
+	nav
+		a(href="/payments") Payments
+		| >
+		a(href="/payments/new", aria-current="page") Input Payment Information
+
+block content
+	h1 Input Payment Information
+	form(method="post", action=("/payments/" + id), enctype="application/x-www-form-urlencoded")
+		input(type="hidden", name="_method", value="patch")
+		input(type="hidden", name="action", value="choose")
+		if origin
+			input(type="hidden", name="origin", value=origin)
+		label(for="receiver") Receiver
+		input(id="receiver", name="receiver", type="text", required)
+		fieldset
+			legend Type
+			input(id="iban", name="type", type="radio", value="IBAN", checked=(type === "IBAN" ? "checked" : false), required)
+			label(for="iban") IBAN
+			input(id="creditcard" name="type" type="radio" value="Credit Card", checked=(type === "Credit Card" ? "checked" : false), required)
+			label(for="creditcard") Credit Card
+		input(type="submit")
+

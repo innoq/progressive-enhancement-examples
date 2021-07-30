@@ -1,0 +1,27 @@
+extends ../../layout.pug
+include ../../mixins/navbar.pug
+
+block head
+	title Choose Response for: #{id}
+
+block header
+	+navbar
+	nav
+		a(href="/") Complaints
+		| >
+		a(href="/complaints/" + id) Complaint: #{message}
+		| >
+		a(href="/complaints/" + id + "/wizard?action=custom", aria-current="page") Choose default response
+
+block content
+	h1 Choose default response for complaint
+	p=message
+	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
+		input(type="hidden", name="_method", value="put")
+		input(type="hidden", name="action", value="choose")
+		label(for="response") Response
+		select(id="response", name="response")
+			option Unfortunately, your complaint does not fall under the issues that are our responsibility
+			option We have investigated your claims and were unable to verify them
+			option We have received your claims and have begun a formal investigation
+		input(type="submit")

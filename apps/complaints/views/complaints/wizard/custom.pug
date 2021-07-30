@@ -1,0 +1,25 @@
+extends ../../layout.pug
+include ../../mixins/navbar.pug
+
+block head
+	title Apologize for: #{id}
+
+block header
+	+navbar
+	nav
+		a(href="/") Complaints
+		| >
+		a(href="/complaints/" + id) Complaint: #{message}
+		| >
+		a(href="/complaints/" + id + "/wizard?action=choose", aria-current="page") Custom Apology
+
+block content
+	h1 Custom Apology for complaint
+	p=message
+	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
+		input(type="hidden", name="_method", value="put")
+		input(type="hidden", name="action", value="custom")
+		label(for="apology", aria-describedby="instructions") Apology
+		textarea(name="apology")
+		small(id="instructions") Please draft a nice apology here
+		input(type="submit")

@@ -1,0 +1,40 @@
+extends ../layout.pug
+include ../mixins/navbar.pug
+
+block head
+	title Complaint: #{id}
+
+block header
+	+navbar
+	nav
+		a(href="/") Complaints
+		| >
+		a(href="/complaints/" + id, aria-current="page") Complaint: #{message}
+
+block content
+	h1 Complaint
+	p=message
+	if status
+		dl
+			dt Status
+			dd=status
+			dt Response
+			dd=response
+			if paymentId
+				dt Payment
+				dd
+					a(href="/payments/" + paymentId) Payment Information
+	h2 What would you like to do?
+	form(action="/complaints/" + id + "/wizard", method="get", enctype="application/x-www-form-urlencoded")
+		fieldset
+			legend How would you like to handle this event?
+			input(id="custom", type="radio", name="action", value="custom")
+			label(for="custom") Custom apology
+			input(id="choose", type="radio", name="action", value="choose")
+			label(for="choose") Choose default response
+			input(id="reimburse", type="radio", name="action", value="reimburse")
+			label(for="reimburse") Reimburse the user for their inconvenience
+			input(type="submit")
+
+
+
