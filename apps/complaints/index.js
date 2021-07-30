@@ -5,6 +5,7 @@ const app = express();
 const port = 3000
 
 app.set("view engine", "pug");
+app.use(express.static("public"));
 app.use(express.urlencoded({
 	extended: true
 }));
@@ -13,9 +14,9 @@ app.use(methodOverride(function (req, res) {
 		// look in urlencoded POST bodies and delete it
 		var method = req.body._method
 		delete req.body._method
-		return method
+		return method;
 	}
-}))
+}));
 
 // COMPLAINTS
 
