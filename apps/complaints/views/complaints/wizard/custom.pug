@@ -1,20 +1,20 @@
-extends ../../layout.pug
-include ../../mixins/navbar.pug
+extends ../../components/layout/template.pug
+include ../../components/navbar/mixin.pug
+include ../../components/breadcrumb/mixin.pug
 
 block head
 	title Apologize for: #{id}
 
 block header
+	h1 Custom Apology for complaint
 	+navbar
-	nav
-		a(href="/") Complaints
-		| >
-		a(href="/complaints/" + id) Complaint: #{message}
-		| >
-		a(href="/complaints/" + id + "/wizard?action=choose", aria-current="page") Custom Apology
+	+breadcrumb
+		+navitem("/", "Complaints")
+		+navitem("/complaints/" + id, "Complaint: " + message)
+		+navitem("/complaints/" + id + "/wizard?action=custom", "Custom Apology", true)
 
 block content
-	h1 Custom Apology for complaint
+	h2 Draft Custom Apology
 	p=message
 	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
 		input(type="hidden", name="_method", value="put")

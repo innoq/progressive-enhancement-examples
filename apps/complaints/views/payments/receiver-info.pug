@@ -1,18 +1,19 @@
-extends ../layout.pug
-include ../mixins/navbar.pug
+extends ../components/layout/template.pug
+include ../components/navbar/mixin.pug
+include ../components/breadcrumb/mixin.pug
 
 block head
 	title Input Payment Information
 
 block header
+	h1 Input Payment Information
 	+navbar
-	nav
-		a(href="/payments") Payments
-		| >
-		a(href="/payments/new", aria-current="page") Input Payment Information
+	+breadcrumb
+		+navitem("/payments", "Payments")
+		+navitem("/payments/new", "Input Payment Information", true)
 
 block content
-	h1 Input Payment Information
+	h2 Add payment receiver
 	form(method="post", action=("/payments/" + id), enctype="application/x-www-form-urlencoded")
 		input(type="hidden", name="_method", value="patch")
 		input(type="hidden", name="action", value="choose")

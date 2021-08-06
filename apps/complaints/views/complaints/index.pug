@@ -1,14 +1,15 @@
-extends ../layout.pug
-include ../mixins/navbar.pug
+extends ../components/layout/template.pug
+include ../components/navbar/mixin.pug
 
 block head
 	title Complaints
 
 block header
+	h1 Complaints
 	+navbar('complaints')
 
 block content
-	h1 Complaints
+	h2 List of Complaints
 	ul
 		each complaint in complaints
 			li

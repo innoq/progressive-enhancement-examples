@@ -1,14 +1,15 @@
-extends ../layout.pug
-include ../mixins/navbar.pug
+extends ../components/layout/template.pug
+include ../components/navbar/mixin.pug
 
 block head
 	title Payments
 
 block header
+	h1 Payments
 	+navbar('payments')
 
 block content
-	h1 Payments
+	h2 List of Payments
 	ul
 		each payment in payments
 			li

@@ -1,18 +1,19 @@
-extends ../layout.pug
-include ../mixins/navbar.pug
+extends ../components/layout/template.pug
+include ../components/navbar/mixin.pug
+include ../components/breadcrumb/mixin.pug
 
 block head
 	title Complaint: #{id}
 
 block header
+	h1 Complaint
 	+navbar
-	nav
-		a(href="/") Complaints
-		| >
-		a(href="/complaints/" + id, aria-current="page") Complaint: #{message}
+	+breadcrumb
+		+navitem("/", "Complaints")
+		+navitem("/complaints/" + id, "Complaint: " + message, true)
 
 block content
-	h1 Complaint
+	h2 Complaint Information
 	p=message
 	if status
 		dl
@@ -24,10 +25,10 @@ block content
 				dt Payment
 				dd
 					a(href="/payments/" + paymentId) Payment Information
-	h2 What would you like to do?
+	h2 Handle Complaint
 	form(action="/complaints/" + id + "/wizard", method="get", enctype="application/x-www-form-urlencoded")
 		fieldset
-			legend How would you like to handle this event?
+			legend How would you like to handle this complaint?
 			input(id="custom", type="radio", name="action", value="custom")
 			label(for="custom") Custom apology
 			input(id="choose", type="radio", name="action", value="choose")

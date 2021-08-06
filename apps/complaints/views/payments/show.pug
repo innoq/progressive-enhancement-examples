@@ -1,22 +1,22 @@
-extends ../layout.pug
-include ../mixins/navbar.pug
+extends ../components/layout/template.pug
+include ../components/navbar/mixin.pug
+include ../components/breadcrumb/mixin.pug
 
 block head
 	title Payment: #{id}
 
 block header
+	h1 Payment for #{receiver}
 	+navbar
-	nav
-		a(href="/payments") Payments
-		| >
-		a(href="/payments/" + id, aria-current="page") Payment for #{receiver}
+	+breadcrumb
+		+navitem("/payments", "Payments")
+		+navitem("/payments/" + id, "Payment for " + receiver, true)
 
 block content
-	h1 Payment
-	h2 Receiver
-	p=receiver
 	h2 Payment Details
 	dl
+		dt Receiver
+		dd=receiver
 		dt Type
 		dd=type
 		if type === "IBAN"

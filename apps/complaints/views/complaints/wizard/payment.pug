@@ -1,21 +1,24 @@
-extends ../../layout.pug
-include ../../mixins/navbar.pug
+extends ../../components/layout/template.pug
+include ../../components/navbar/mixin.pug
+include ../../components/breadcrumb/mixin.pug
 
 block head
 	title Choose Response for: #{id}
 
 block header
+	h1 Reimburse payment for complaint
 	+navbar
-	nav
-		a(href="/") Complaints
-		| >
-		a(href="/complaints/" + id) Complaint: #{message}
-		| >
-		a(href="/complaints/" + id + "/wizard?action=reimburse", aria-current="page") Reimbursement
+	+breadcrumb
+		+navitem("/", "Complaints")
+		+navitem("/complaints/" + id, "Complaint: " + message)
+		+navitem("/complaints/" + id + "/wizard?action=reimburse", "Reimbursement", true)
 
 block content
-	h1 Reimburse payment for complaint
+	h2 Choose or create payment for reimbursement
 	p=message
+	form(method="post", action="/payments/")
+		input(type="hidden", name="origin", value="/complaints/" + id + "/wizard?action=reimburse")
+		button(type="submit") Create New Payment
 	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
 		input(type="hidden", name="_method", value="put")
 		input(type="hidden", name="action", value="reimburse")
@@ -24,6 +27,3 @@ block content
 			each payment in payments
 				option(value=payment.id)=payment.receiver + ', ' + payment.type
 		input(type="submit")
-	form(method="post", action="/payments/")
-		input(type="hidden", name="origin", value="/complaints/" + id + "/wizard?action=reimburse")
-		button(type="submit") Create New Payment
