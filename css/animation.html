@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.animation {
+				font-size: 3em;
+				background-color: cornflowerblue;
+				border: 5px solid darkblue;
+				padding: 1em;
+				border-radius: 50%;
+				width: 1em;
+				height: 1em;
+
+				display: grid;
+				place-items: center;
+			}
+
+			@media (prefers-reduced-motion: no-preference) {
+				body:not(.animation-on) .animation {
+					transition: 1s ease-in-out;
+					animation: 3s linear 1s infinite alternate slidein;
+				}
+
+				body:not(.animation-on) .animation:hover {
+					transform: scale(1.1) rotate(90deg);
+				}
+			}
+
+			@keyframes slidein {
+				from {
+					margin-left: 0;
+				}
+				to {
+					margin-left: 1em;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="animation">
+			:)
+		</div>
+
+		<button type="button" onclick="toggleAnimation()">Toggle Animation</button>
+		<script>
+			function toggleAnimation() {
+				if (document.body.classList.contains("animation-on")) {
+					document.body.classList.remove("animation-on");
+				} else {
+					document.body.classList.add("animation-on");
+				}
+			}
+		</script>
+	</body>
+</html>
