@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			:root {
+				--text-color: black;
+				--bg-color: white;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--text-color: white;
+					--bg-color: black;
+				}
+			}
+
+			body[data-theme='dark-mode'] {
+				--text-color: white;
+				--bg-color: black;
+			}
+
+			body {
+				color: var(--text-color);
+				background-color: var(--bg-color);
+				max-width: 70ch;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Light Mode vs. Dark Mode</h1>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+			eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+			voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+			kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+			ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+			invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+			et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+			takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+			consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+			dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+			duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+			Lorem ipsum dolor sit amet.
+		</p>
+
+		<button type="button" onclick="toggleTheme()">Toggle Light Mode / Dark Mode</button>
+		<script>
+			function toggleTheme() {
+				if (document.body.hasAttribute("data-theme")) {
+					document.body.removeAttribute("data-theme");
+				} else {
+					document.body.setAttribute("data-theme", "dark-mode");
+				}
+			}
+		</script>
+	</body>
+</html>
