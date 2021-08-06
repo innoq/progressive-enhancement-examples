@@ -1,6 +1,7 @@
 extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
 include ../components/field-group/mixins.pug
+include ../components/button/mixin.pug
 
 block head
 	title Complaints
@@ -22,5 +23,4 @@ block content
 	h2 Create a new complaint
 	form(action="/complaints/", method="post", enctype="application/x-www-form-urlencoded")
 		+text-field("message", "Complaint", null, true)
-		input(type="submit")
-
+		+button("Create Complaint")

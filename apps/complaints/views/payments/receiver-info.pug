@@ -3,6 +3,7 @@ include ../components/navbar/mixin.pug
 include ../components/breadcrumb/mixin.pug
 include ../components/radio-group/mixin.pug
 include ../components/field-group/mixins.pug
+include ../components/button/mixin.pug
 
 block head
 	title Input Payment Information
@@ -26,5 +27,5 @@ block content
 			legend Type
 			+radio-group("type", "IBAN", "IBAN", (type === "IBAN" ? "checked" : false), true)
 			+radio-group("type", "Credit Card", "CreditCard", (type === "CreditCard" ? "checked" : false), true)
-		input(type="submit")
+		+button("Payment Receiver")
 

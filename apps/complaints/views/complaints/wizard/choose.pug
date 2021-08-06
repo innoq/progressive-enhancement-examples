@@ -1,6 +1,7 @@
 extends ../../components/layout/template.pug
 include ../../components/navbar/mixin.pug
 include ../../components/breadcrumb/mixin.pug
+include ../../components/button/mixin.pug
 
 block head
 	title Choose Response for: #{id}
@@ -25,4 +26,4 @@ block content
 				option Unfortunately, your complaint does not fall under the issues that are our responsibility
 				option We have investigated your claims and were unable to verify them
 				option We have received your claims and have begun a formal investigation
-		input(type="submit")
+		+button("Submit Response")

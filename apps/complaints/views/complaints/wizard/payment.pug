@@ -1,6 +1,7 @@
 extends ../../components/layout/template.pug
 include ../../components/navbar/mixin.pug
 include ../../components/breadcrumb/mixin.pug
+include ../../components/button/mixin.pug
 
 block head
 	title Choose Response for: #{id}
@@ -18,7 +19,7 @@ block content
 	p=message
 	form(method="post", action="/payments/")
 		input(type="hidden", name="origin", value="/complaints/" + id + "/wizard?action=reimburse")
-		button(type="submit") Create New Payment
+		+button("Create New Payment")
 	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
 		input(type="hidden", name="_method", value="put")
 		input(type="hidden", name="action", value="reimburse")
@@ -27,4 +28,4 @@ block content
 			select(id="payment", name="payment")
 				each payment in payments
 					option(value=payment.id)=payment.receiver + ', ' + payment.type
-		input(type="submit")
+		+button("Choose payment")

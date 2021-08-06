@@ -1,5 +1,6 @@
 extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
+include ../components/button/mixin.pug
 
 block head
 	title Payments
@@ -16,4 +17,4 @@ block content
 				li
 					a(href="/payments/" + payment.id)=payment.receiver + ", " + payment.type
 	form(method="post", action="/payments/")
-		button(type="submit") Create New Payment
+		+button("Create New Payment")

@@ -2,6 +2,7 @@ extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
 include ../components/breadcrumb/mixin.pug
 include ../components/field-group/mixins.pug
+include ../components/button/mixin.pug
 
 block head
 	title Update Payment Information
@@ -28,5 +29,5 @@ block content
 			+number-field("expiryMonth", "Month of Expiry", null, true, "MM")
 			+number-field("expiryYear", "Year of Expiry", null, true, "YY")
 			+number-field("cvc", "CVC", null, true, "XXX")
-		input(type="submit")
+		+button("Submit Payment Information")
 

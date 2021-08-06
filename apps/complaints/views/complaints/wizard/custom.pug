@@ -2,6 +2,7 @@ extends ../../components/layout/template.pug
 include ../../components/navbar/mixin.pug
 include ../../components/breadcrumb/mixin.pug
 include ../../components/field-group/mixins.pug
+include ../../components/button/mixin.pug
 
 block head
 	title Apologize for: #{id}
@@ -21,4 +22,4 @@ block content
 		input(type="hidden", name="_method", value="put")
 		input(type="hidden", name="action", value="custom")
 		+textarea("apology", "Apology", null, true, null, "Please draft a nice apology here")
-		input(type="submit")
+		+button("Submit Apology")
