@@ -1,6 +1,7 @@
 extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
 include ../components/breadcrumb/mixin.pug
+include ../components/radio/mixin.pug
 
 block head
 	title Input Payment Information
@@ -23,9 +24,7 @@ block content
 		input(id="receiver", name="receiver", type="text", required)
 		fieldset
 			legend Type
-			input(id="iban", name="type", type="radio", value="IBAN", checked=(type === "IBAN" ? "checked" : false), required)
-			label(for="iban") IBAN
-			input(id="creditcard" name="type" type="radio" value="Credit Card", checked=(type === "Credit Card" ? "checked" : false), required)
-			label(for="creditcard") Credit Card
+			+radio("type", "IBAN", "IBAN", (type === "IBAN" ? "checked" : false), true)
+			+radio("type", "Credit Card", "CreditCard", (type === "CreditCard" ? "checked" : false), true)
 		input(type="submit")
 

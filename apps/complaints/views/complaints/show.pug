@@ -1,6 +1,7 @@
 extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
 include ../components/breadcrumb/mixin.pug
+include ../components/radio/mixin.pug
 
 block head
 	title Complaint: #{id}
@@ -29,12 +30,9 @@ block content
 	form(action="/complaints/" + id + "/wizard", method="get", enctype="application/x-www-form-urlencoded")
 		fieldset
 			legend How would you like to handle this complaint?
-			input(id="custom", type="radio", name="action", value="custom")
-			label(for="custom") Custom apology
-			input(id="choose", type="radio", name="action", value="choose")
-			label(for="choose") Choose default response
-			input(id="reimburse", type="radio", name="action", value="reimburse")
-			label(for="reimburse") Reimburse the user for their inconvenience
+			+radio("action", "Custom Apology", "custom", true)
+			+radio("action", "Choose default response", "choose")
+			+radio("action", "Reimburse the user for their convenience", "reimburse")
 			input(type="submit")
 
 

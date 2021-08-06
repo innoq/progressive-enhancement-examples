@@ -134,7 +134,7 @@ let payments = [{
 }, {
 	id: "2",
 	receiver: "Bob Smiley",
-	type: "Credit Card",
+	type: "CreditCard",
 	value: "1234 5678 9012 3456",
 	cvc: "789",
 	expiryMonth: 10,
@@ -200,7 +200,7 @@ app.patch("/payments/:paymentId", (req, res) => {
 		payment.iban = req.body.iban;
 	}
 
-	if (payment.type === "Credit Card") {
+	if (payment.type === "CreditCard") {
 		payment.cardnr = req.body.cardnr;
 		payment.expiryMonth = req.body.expiryMonth;
 		payment.expiryYear = req.body.expiryYear;
