@@ -1,0 +1,25 @@
+:root {
+  --spacer-xxs: 0.25rem;
+  --spacer-xs: 0.5rem;
+  --spacer-sm: 0.75rem;
+  --spacer-base: 1.25rem;
+  --spacer-md: 2rem;
+  --spacer-lg: 3.125rem;
+
+  --primary: cornflowerblue;
+  --primary-bg: cornflowerblue;
+  --primary-accent: #{darken(cornflowerblue, 15%)};
+  --primary-text: white;
+  --text-color: #011230;
+  --background-color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #79a8ff;
+    --primary-accent: #{lighten(#79a8ff, 5%)};
+    --primary-bg: #385170;
+    --background-color: #142d4c;
+    --text-color: #e0e0e0;
+  }
+}
