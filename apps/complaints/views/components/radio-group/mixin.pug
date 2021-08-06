@@ -1,0 +1,4 @@
+mixin radio-group(name, label, value, selected, required)
+	div(class="radio-group")
+		input(id=name + (value || label), name=name, type="radio", value=value, selected=selected, required=required)
+		label(for=name + (value || label))=label

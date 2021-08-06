@@ -1,0 +1,28 @@
+mixin text-field(name, label, value, required, placeholder, help)
+	div(class="field-group")
+		label(for=name)=label
+		input(id=name, name=name, type="text", value=value, required=required,
+			aria-describedby=help ? name + '-help' : null, placeholder=placeholder)
+		if help
+			small(id=name + "-help")=help
+
+mixin textarea(name, label, value, required, placeholder, help)
+	div(class="field-group")
+		label(for=name)=label
+		textarea(id=name, required=required, aria-describedby=help ? name + '-help' : null,
+			placeholder=placeholder)=value
+		if help
+			small(id=name + "-help")=help
+
+mixin number-field(name, label, value, required, placeholder, help)
+	div(class="field-group")
+		label(for=name)=label
+		input(id=name, name=name, type="number", value=value, required=required,
+			aria-describedby=help ? name + '-help' : null)
+		if help
+			small(id=name + "-help")=help
+
+mixin select-field(name, label, options, selectedOption)
+	select(class="field-group")
+		each option in options
+			option(value=option.id, selected=(option.text === selectedOption))=option.text
