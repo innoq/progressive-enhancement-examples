@@ -4,5 +4,5 @@ mixin navbar(current)
 	nav(class="navbar")
 		h2 Main Menu
 		ul(role="list")
-			+navitem("/", "Complaints", current === 'complaints')
-			+navitem("/payments/", "Payments", current === 'payments')
+			+navitem("/", "Complaints", current === 'complaints', 'inbox')
+			+navitem("/payments/", "Payments", current === 'payments', 'money-check-alt')

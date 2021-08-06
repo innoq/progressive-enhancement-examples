@@ -1,3 +1,8 @@
-mixin navitem(href, label, current)
+include ../icon/mixin.pug
+
+mixin navitem(href, label, current, icon)
 	li
-		a(href=href, aria-current=current === true ? "page" : current)=label
+		a(href=href, aria-current=current === true ? "page" : current)
+			if icon
+				+icon(icon)
+			| #{label}
