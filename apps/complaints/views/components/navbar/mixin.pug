@@ -1,0 +1,8 @@
+include ../navitem/mixin.pug
+
+mixin navbar(current)
+	nav(class="navbar")
+		h2 Main Menu
+		ul(role="list")
+			+navitem("/", "Complaints", current === 'complaints')
+			+navitem("/payments/", "Payments", current === 'payments')

@@ -1,0 +1,7 @@
+@use "../../../lib/styles/helpers";
+
+.navbar {
+  h2 {
+    @extend %visually-hidden;
+  }
+}

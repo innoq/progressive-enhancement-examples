@@ -1,0 +1,3 @@
+mixin navitem(href, label, current)
+	li
+		a(href=href, aria-current=current === true ? "page" : current)=label

@@ -4,7 +4,10 @@
 	"description": "An app to collect and manage complaints",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js"
+		"start": "npm-run-all --parallel server compile:watch",
+		"server": "node index.js",
+		"compile": "faucet --compact",
+		"compile:watch": "faucet --watch"
 	},
 	"author": "Joy Heron",
 	"license": "ISC",
@@ -13,5 +16,8 @@
 		"method-override": "^3.0.0",
 		"pug": "^3.0.2",
 		"uuid": "^8.3.2"
+	},
+	"devDependencies": {
+		"faucet-pipeline-sass": "^1.7.0"
 	}
 }
