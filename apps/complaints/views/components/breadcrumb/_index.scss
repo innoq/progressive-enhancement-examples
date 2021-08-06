@@ -1,1 +1,28 @@
 @use "../../../lib/styles/helpers";
+
+.breadcrumb {
+  padding: var(--spacer-md) var(--spacer-sm);
+
+  h2 {
+    @extend %visually-hidden;
+  }
+
+  ul {
+    display: flex;
+    margin: calc(-1 * var(--spacer-sm) / 2);
+    flex-wrap: wrap;
+  }
+
+  ul > * {
+    margin: calc(var(--spacer-sm) / 2);
+  }
+
+  li:not(:last-child) {
+    margin-right: 0;
+
+    &::after {
+      content: "/";
+      margin-left: var(--spacer-xs);
+    }
+  }
+}

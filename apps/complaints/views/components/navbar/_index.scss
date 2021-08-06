@@ -1,1 +1,33 @@
 @use "../../../lib/styles/helpers";
+
+.navbar {
+  background-color: var(--primary-bg);
+
+  h2 {
+    @extend %visually-hidden;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  a {
+    display: block;
+    color: var(--primary-text);
+    padding: var(--spacer-sm);
+    text-decoration: none;
+
+    .icon {
+      margin-right: var(--spacer-xs);
+    }
+
+    &:hover {
+      text-decoration: underline;
+      background-color: var(--primary-accent);
+    }
+
+    &[aria-current] {
+      background-color: var(--primary-accent);
+    }
+  }
+}

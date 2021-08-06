@@ -1,0 +1,48 @@
+$container-width: 75ch;
+
+%container {
+  display: block;
+  max-width: $container-width;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout {
+  > header {
+    display: grid;
+    grid-template-areas:
+      "navbar"
+      "breadcrumb"
+      "h1";
+
+    > .navbar {
+      grid-area: navbar;
+      justify-self: stretch
+    }
+
+    > .breadcrumb {
+      grid-area: breadcrumb;
+    }
+
+    > h1 {
+      grid-area: h1;
+      padding: var(--spacer-sm);
+      margin: 0;
+    }
+
+    @media (min-width: $container-width) {
+      grid-template-areas:
+        "navbar navbar navbar"
+        ". breadcrumb ."
+        ". h1 .";
+      grid-template-columns: 1fr $container-width 1fr;
+    }
+  }
+
+  > main {
+    @extend %container;
+
+    padding: var(--spacer-sm);
+  }
+}
