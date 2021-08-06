@@ -1,5 +1,6 @@
 extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
+include ../components/field-group/mixins.pug
 
 block head
 	title Complaints
@@ -20,7 +21,6 @@ block content
 						small="(" + complaint.status + ")"
 	h2 Create a new complaint
 	form(action="/complaints/", method="post", enctype="application/x-www-form-urlencoded")
-		label(for="complaint") Complaint
-		input(id="complaint", name="message")
+		+text-field("message", "Complaint", null, true)
 		input(type="submit")
 

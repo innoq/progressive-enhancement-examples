@@ -1,7 +1,8 @@
 extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
 include ../components/breadcrumb/mixin.pug
-include ../components/radio/mixin.pug
+include ../components/radio-group/mixin.pug
+include ../components/field-group/mixins.pug
 
 block head
 	title Input Payment Information
@@ -20,11 +21,10 @@ block content
 		input(type="hidden", name="action", value="choose")
 		if origin
 			input(type="hidden", name="origin", value=origin)
-		label(for="receiver") Receiver
-		input(id="receiver", name="receiver", type="text", required)
+		+text-field("receiver", "Receiver", "", true)
 		fieldset
 			legend Type
-			+radio("type", "IBAN", "IBAN", (type === "IBAN" ? "checked" : false), true)
-			+radio("type", "Credit Card", "CreditCard", (type === "CreditCard" ? "checked" : false), true)
+			+radio-group("type", "IBAN", "IBAN", (type === "IBAN" ? "checked" : false), true)
+			+radio-group("type", "Credit Card", "CreditCard", (type === "CreditCard" ? "checked" : false), true)
 		input(type="submit")
 

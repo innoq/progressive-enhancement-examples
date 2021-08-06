@@ -19,9 +19,10 @@ block content
 	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
 		input(type="hidden", name="_method", value="put")
 		input(type="hidden", name="action", value="choose")
-		label(for="response") Response
-		select(id="response", name="response")
-			option Unfortunately, your complaint does not fall under the issues that are our responsibility
-			option We have investigated your claims and were unable to verify them
-			option We have received your claims and have begun a formal investigation
+		div(class="field-group")
+			label(for="response") Response
+			select(id="response", name="response")
+				option Unfortunately, your complaint does not fall under the issues that are our responsibility
+				option We have investigated your claims and were unable to verify them
+				option We have received your claims and have begun a formal investigation
 		input(type="submit")

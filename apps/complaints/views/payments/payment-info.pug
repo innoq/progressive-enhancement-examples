@@ -1,6 +1,7 @@
 extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
 include ../components/breadcrumb/mixin.pug
+include ../components/field-group/mixins.pug
 
 block head
 	title Update Payment Information
@@ -21,16 +22,11 @@ block content
 		if origin
 			input(type="hidden", name="origin", value=origin)
 		if type === "IBAN"
-			label(for="iban") IBAN
-			input(id="iban", type="text", name="iban" required)
-		if type === "Credit Card"
-			label(for="cardnr") Credit Card Number
-			input(id="cardnr", type="text", name="cardnr", required)
-			label(for="expiryMonth") Month of Expiry
-			input(id="expiryMonth", name="expiryMonth", type="number", placeholder="MM", required)
-			label(for="expiryYear") Year of Expiry
-			input(id="expiryYear", name="expiryYear", type="number", placeholder="YY", required)
-			label(for="cvc") CVC
-			input(id="cvc", name="cvc", type="number", required)
+			+text-field("iban", "IBAN", null, true)
+		if type === "CreditCard"
+			+text-field("cardnr", "Credit Card Number", null, true)
+			+number-field("expiryMonth", "Month of Expiry", null, true, "MM")
+			+number-field("expiryYear", "Year of Expiry", null, true, "YY")
+			+number-field("cvc", "CVC", null, true, "XXX")
 		input(type="submit")
 

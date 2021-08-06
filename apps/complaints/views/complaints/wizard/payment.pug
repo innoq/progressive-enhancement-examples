@@ -22,8 +22,9 @@ block content
 	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
 		input(type="hidden", name="_method", value="put")
 		input(type="hidden", name="action", value="reimburse")
-		label
-		select(name="payment")
-			each payment in payments
-				option(value=payment.id)=payment.receiver + ', ' + payment.type
+		div(class="field-group")
+			label(for="payment") Choose a payment
+			select(id="payment", name="payment")
+				each payment in payments
+					option(value=payment.id)=payment.receiver + ', ' + payment.type
 		input(type="submit")

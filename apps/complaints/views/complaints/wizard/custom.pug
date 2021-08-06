@@ -1,6 +1,7 @@
 extends ../../components/layout/template.pug
 include ../../components/navbar/mixin.pug
 include ../../components/breadcrumb/mixin.pug
+include ../../components/field-group/mixins.pug
 
 block head
 	title Apologize for: #{id}
@@ -19,7 +20,5 @@ block content
 	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
 		input(type="hidden", name="_method", value="put")
 		input(type="hidden", name="action", value="custom")
-		label(for="apology", aria-describedby="instructions") Apology
-		textarea(name="apology")
-		small(id="instructions") Please draft a nice apology here
+		+textarea("apology", "Apology", null, true, null, "Please draft a nice apology here")
 		input(type="submit")

@@ -4,7 +4,9 @@
 @use "./helpers";
 
 @use "../../views/components/icon";
-@use "../../views/components/radio";
+@use "../../views/components/radio-group";
+@use "../../views/components/field-group";
+@use "../../views/components/form-group";
 @use "../../views/components/navbar";
 @use "../../views/components/breadcrumb";
 @use "../../views/components/layout";
