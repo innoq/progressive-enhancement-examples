@@ -1,0 +1,24 @@
+.field-group {
+  label {
+    display: block;
+    margin-bottom: var(--spacer-xxs);
+  }
+
+  input, select, textarea {
+    border: 1px solid;
+    padding: var(--spacer-xs) var(--spacer-sm);
+
+    + small {
+      display: block;
+      margin-top: var(--spacer-xxs);
+    }
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  & + .button {
+    margin-top: var(--spacer-sm);
+  }
+}

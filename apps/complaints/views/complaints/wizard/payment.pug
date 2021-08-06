@@ -27,5 +27,6 @@ block content
 			label(for="payment") Choose a payment
 			select(id="payment", name="payment")
 				each payment in payments
-					option(value=payment.id)=payment.receiver + ', ' + payment.type
+					if !payment.incomplete
+						option(value=payment.id)=payment.receiver + ', ' + payment.type
 		+button("Choose payment")

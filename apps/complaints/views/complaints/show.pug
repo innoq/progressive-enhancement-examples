@@ -2,6 +2,7 @@ extends ../components/layout/template.pug
 include ../components/navbar/mixin.pug
 include ../components/breadcrumb/mixin.pug
 include ../components/radio-group/mixin.pug
+include ../components/button/mixin.pug
 
 block head
 	title Complaint: #{id}
@@ -33,7 +34,7 @@ block content
 			+radio-group("action", "Custom Apology", "custom", true)
 			+radio-group("action", "Choose default response", "choose")
 			+radio-group("action", "Reimburse the user for their convenience", "reimburse")
-			input(type="submit")
+		+button("Choose Action")
 
 
 
