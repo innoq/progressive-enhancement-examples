@@ -15,9 +15,5 @@ function restoreState(event) {
 	}
 }
 
-export function historyChange(state, title, url) {
-	history.pushState(state, title, url);
-}
-
 history.replaceState({ url: window.location.href }, document.title, window.location.href);
 window.onpopstate = event => restoreState(event);
