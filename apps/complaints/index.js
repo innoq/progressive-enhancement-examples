@@ -56,7 +56,7 @@ app.get("/complaints/:complaintId", (req, res) => {
 	let complaint = findComplaint(req);
 
 	if (complaint) {
-		res.render("complaints/show", { ...complaint });
+		res.render("complaints/show", { ...complaint, selected: req.query.selected });
 	} else {
 		res.status(404).send("Complaint not found!")
 	}
@@ -89,7 +89,7 @@ app.get("/complaints/:complaintId/wizard", (req, res) => {
 			res.render("complaints/wizard/choose", { ...complaint });
 			break;
 		case "reimburse":
-			res.render("complaints/wizard/payment", { ...complaint, payments });
+			res.render("complaints/wizard/payment", { ...complaint, payments, paymentId: req.query.paymentId });
 			break;
 		default:
 			res.status(404).send("Action not found!");
@@ -207,9 +207,13 @@ app.patch("/payments/:paymentId", (req, res) => {
 		payment.cvc = req.body.cvc;
 	}
 
-	payments.incomplete = false;
+	payment.incomplete = false;
 
-	res.redirect(origin || "/payments/");
+	let redirectUri = origin || "/payments/";
+	let separator = redirectUri.includes("?") ? "&" : "?";
+	redirectUri = redirectUri + separator + "paymentId=" + payment.id;
+
+	res.redirect(redirectUri);
 });
 
 

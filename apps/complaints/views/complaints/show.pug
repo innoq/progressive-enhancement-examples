@@ -28,13 +28,15 @@ block content
 				dd
 					a(href="/payments/" + paymentId) Payment Information
 	h2 Handle Complaint
-	form(action="/complaints/" + id + "/wizard", method="get", enctype="application/x-www-form-urlencoded")
-		fieldset(class="form-group")
-			legend How would you like to handle this complaint?
-			+radio-group("action", "Custom Apology", "custom", true)
-			+radio-group("action", "Choose default response", "choose")
-			+radio-group("action", "Reimburse the user for their convenience", "reimburse")
-		+button("Choose Action")
+	hijax-element
+		auto-submit
+			form(action="/complaints/" + id + "/wizard", method="get", enctype="application/x-www-form-urlencoded")
+				fieldset(class="form-group")
+					legend How would you like to handle this complaint?
+					+radio-group("action", "Custom Apology", "custom", selected === "custom")
+					+radio-group("action", "Choose default response", "choose", selected === "choose")
+					+radio-group("action", "Reimburse the user for their convenience", "reimburse", selected === "reimburse")
+				+button("Choose Action")
 
 
 

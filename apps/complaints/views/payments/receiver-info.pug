@@ -17,15 +17,16 @@ block header
 
 block content
 	h2 Add payment receiver
-	form(method="post", action=("/payments/" + id), enctype="application/x-www-form-urlencoded")
-		input(type="hidden", name="_method", value="patch")
-		input(type="hidden", name="action", value="choose")
-		if origin
-			input(type="hidden", name="origin", value=origin)
-		+text-field("receiver", "Receiver", "", true)
-		fieldset
-			legend Type
-			+radio-group("type", "IBAN", "IBAN", (type === "IBAN" ? "checked" : false), true)
-			+radio-group("type", "Credit Card", "CreditCard", (type === "CreditCard" ? "checked" : false), true)
-		+button("Payment Receiver")
+	hijax-element
+		form(method="post", action=("/payments/" + id), enctype="application/x-www-form-urlencoded")
+			input(type="hidden", name="_method", value="patch")
+			input(type="hidden", name="action", value="choose")
+			if origin
+				input(type="hidden", name="origin", value=origin)
+			+text-field("receiver", "Receiver", "", true)
+			fieldset
+				legend Type
+				+radio-group("type", "IBAN", "IBAN", (type === "IBAN" ? "checked" : false), true)
+				+radio-group("type", "Credit Card", "CreditCard", (type === "CreditCard" ? "checked" : false), true)
+			+button("Payment Receiver")
 

@@ -2,6 +2,7 @@ extends ../../components/layout/template.pug
 include ../../components/navbar/mixin.pug
 include ../../components/breadcrumb/mixin.pug
 include ../../components/button/mixin.pug
+include ../../components/radio-group/mixin.pug
 
 block head
 	title Choose Response for: #{id}
@@ -17,16 +18,27 @@ block header
 block content
 	h2 Choose or create payment for reimbursement
 	p=message
-	form(method="post", action="/payments/")
-		input(type="hidden", name="origin", value="/complaints/" + id + "/wizard?action=reimburse")
-		+button("Create New Payment")
-	form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded")
-		input(type="hidden", name="_method", value="put")
-		input(type="hidden", name="action", value="reimburse")
-		div(class="field-group")
-			label(for="payment") Choose a payment
-			select(id="payment", name="payment")
-				each payment in payments
-					if !payment.incomplete
-						option(value=payment.id)=payment.receiver + ', ' + payment.type
-		+button("Choose payment")
+	hijax-element
+		auto-submit
+			form(action="/complaints/" + id + "/wizard", method="get", enctype="application/x-www-form-urlencoded")
+				fieldset(class="form-group")
+					legend How would you like to handle this complaint?
+					+radio-group("action", "Custom Apology", "custom")
+					+radio-group("action", "Choose default response", "choose")
+					+radio-group("action", "Reimburse the user for their convenience", "reimburse", true)
+				+button("Choose Action")
+		if (paymentId)
+			<p>Your new payment has been created successfully</p>
+		form(action="/complaints/" + id, method="post", enctype="application/x-www-form-urlencoded", data-hijax="disable")
+			input(type="hidden", name="_method", value="put")
+			input(type="hidden", name="action", value="reimburse")
+			div(class="field-group")
+				label(for="payment") Choose a payment
+				select(id="payment", name="payment")
+					each payment in payments
+						if !payment.incomplete
+							option(value=payment.id, selected = payment.id === paymentId)=payment.receiver + ', ' + payment.type
+			+button("Choose payment")
+		form(method="post", action="/payments/")
+			input(type="hidden", name="origin", value="/complaints/" + id + "/wizard?action=reimburse")
+			+button("Create New Payment")

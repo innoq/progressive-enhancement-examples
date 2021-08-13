@@ -17,17 +17,18 @@ block header
 
 block content
 	h2 Add payment information
-	form(method="post", action=("/payments/" + id), enctype="application/x-www-form-urlencoded")
-		input(type="hidden", name="_method", value="patch")
-		input(type="hidden", name="action", value="choose")
-		if origin
-			input(type="hidden", name="origin", value=origin)
-		if type === "IBAN"
-			+text-field("iban", "IBAN", null, true)
-		if type === "CreditCard"
-			+text-field("cardnr", "Credit Card Number", null, true)
-			+number-field("expiryMonth", "Month of Expiry", null, true, "MM")
-			+number-field("expiryYear", "Year of Expiry", null, true, "YY")
-			+number-field("cvc", "CVC", null, true, "XXX")
-		+button("Submit Payment Information")
+	hijax-element
+		form(method="post", action=("/payments/" + id), enctype="application/x-www-form-urlencoded", data-hijax="disable")
+			input(type="hidden", name="_method", value="patch")
+			input(type="hidden", name="action", value="choose")
+			if origin
+				input(type="hidden", name="origin", value=origin)
+			if type === "IBAN"
+				+text-field("iban", "IBAN", null, true)
+			if type === "CreditCard"
+				+text-field("cardnr", "Credit Card Number", null, true)
+				+number-field("expiryMonth", "Month of Expiry", null, true, "MM")
+				+number-field("expiryYear", "Year of Expiry", null, true, "YY")
+				+number-field("cvc", "CVC", null, true, "XXX")
+			+button("Submit Payment Information")
 
