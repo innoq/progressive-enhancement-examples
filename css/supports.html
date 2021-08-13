@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			*, *::before, *::after {
+				box-sizing: border-box;
+			}
+
+			header,
+			main,
+			aside,
+			footer {
+				border: 1px solid black;
+				padding: 1rem;
+			}
+
+			main {
+				float: left;
+				width: 70%;
+				border-right: 1px solid black;
+				min-height: 30rem;
+			}
+
+			aside {
+				float: right;
+				width: 30%;
+				min-height: 30rem;
+			}
+
+			.row::after {
+				content: "";
+				clear: both;
+				display: table;
+			}
+
+			@supports (display: grid) {
+				.row {
+					display: grid;
+					grid-template-columns: 70% 30%;
+					grid-template-rows: 1fr;
+				}
+
+				.row > * {
+					width: auto;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			Header
+		</header>
+
+		<div class="row">
+			<main>
+				Main content
+			</main>
+			<aside>
+				Sidebar
+				Lots and lots and lots of content
+			</aside>
+		</div>
+
+		<footer>
+			Footer
+		</footer>
+	</body>
+</html>

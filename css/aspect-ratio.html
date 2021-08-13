@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			*, *::before, *::after {
+				box-sizing: border-box;
+			}
+
+      p {
+        display: grid;
+        place-items: center;
+        background-color: lightblue;
+        margin: 1rem;
+        max-height: 10rem;
+      }
+
+			.square {
+				aspect-ratio: 1 / 1;
+      }
+
+      .aspect-ratio-16\:9 {
+        aspect-ratio: 16 / 9;
+      }
+
+      .aspect-ratio-3\:2 {
+        aspect-ratio: 3 / 2;
+      }
+
+      .aspect-ratio-4\:3 {
+        aspect-ratio: 4 / 3;
+      }
+
+      .golden {
+        aspect-ratio: 1.618;
+      }
+		</style>
+	</head>
+	<body>
+		<p class="square">
+			1 / 1
+    </p>
+
+    <p class="aspect-ratio-16:9">
+			16 / 9
+		</p>
+
+    <p class="aspect-ratio-3:2">
+			3 / 2
+		</p>
+
+    <p class="aspect-ratio-4:3">
+      4 / 3
+    </p>
+
+    <p class="golden">
+      Golden Ratio
+    </p>
+	</body>
+</html>

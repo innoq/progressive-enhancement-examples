@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			*, *::before, *::after {
+				box-sizing: border-box;
+			}
+
+      [role=list] {
+        list-style-type: none;
+      }
+
+			body {
+				display: grid;
+				grid-template-areas:
+					"header header"
+					"sidebar main";
+				grid-template-columns: minmax(min-content, 15rem) 1fr;
+				grid-template-rows: auto 1fr auto;
+
+				margin: 0;
+				padding: 0.5rem;
+				min-height: 100vh;
+			}
+
+			header, main, aside, footer {
+				display: block;
+				border: 2px solid black;
+				background-color: white;
+				padding: 0.5rem;
+			}
+
+			body > main {
+				grid-area: main;
+			}
+
+			body > header {
+				grid-area: header;
+			}
+
+			body > aside {
+				grid-area: sidebar;
+			}
+
+      header,
+      .flex-wrapper > *,
+      aside {
+        contain: style layout inline-size;
+      }
+
+      .card img {
+        max-width: 23rem;
+      }
+
+      .flex-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .flex-wrapper > * {
+        flex-basis: 23rem;
+        flex-grow: 1;
+      }
+
+      @container (max-width: 20rem) {
+        .card {
+          display: flex;
+          align-items: center;
+        }
+
+        .card img {
+          max-width: 4rem;
+        }
+
+        .card p {
+          display: none;
+        }
+      }
+
+      @container (min-width: 30rem) {
+        .card {
+          display: grid;
+          grid-template-areas:
+            "image title"
+            "image text";
+          gap: 1rem;
+        }
+
+        .card > * {
+          margin: 0;
+        }
+
+        .card > h2 {
+          grid-area: title;
+          align-self: end;
+        }
+
+        .card > p {
+          grid-area: text;
+        }
+
+        .card > img {
+          grid-area: image;
+        }
+      }
+
+      @container (min-width: 60rem) {
+        .card {
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(3, 1fr) 2rem;
+          grid-template-areas:
+            ". . ."
+            ". . title"
+            ". . text"
+            ". . .";
+          row-gap: 0;
+        }
+
+        .card > img {
+          grid-column: 1 / -1;
+          grid-row: 1 / -1;
+          max-width: 100%;
+        }
+
+        .card > h2 {
+          padding: 1.5rem 1.5rem 0.5rem;
+          background-color: pink;
+        }
+        .card > p {
+          padding: 0.5rem 1.5rem 1.5rem;
+          background-color: pink;
+        }
+      }
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="card">
+        <img src="http://placekitten.com/1000/600" alt="Kitten looking at me!">
+        <h2>Kitten</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+          eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+          voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+          amet.
+        </p>
+      </div>
+		</header>
+		<main>
+			<ul class="flex-wrapper" role="list">
+        <li>
+          <div class="card">
+            <img src="http://placekitten.com/1000/600" alt="Kitten looking at me!">
+            <h2>Kitten</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+              clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+              amet.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="card">
+            <img src="http://placekitten.com/1000/600" alt="Kitten looking at me!">
+            <h2>Kitten</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+              clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+              amet.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="card">
+            <img src="http://placekitten.com/1000/600" alt="Kitten looking at me!">
+            <h2>Kitten</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+              clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+              amet.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="card">
+            <img src="http://placekitten.com/1000/600" alt="Kitten looking at me!">
+            <h2>Kitten</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+              clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+              amet.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="card">
+            <img src="http://placekitten.com/1000/600" alt="Kitten looking at me!">
+            <h2>Kitten</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+              eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+              clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+              amet.
+            </p>
+          </div>
+        </li>
+      </div>
+		</main>
+		<aside>
+			<div class="card">
+        <img src="http://placekitten.com/1000/600" alt="Kitten looking at me!">
+        <h2>Kitten</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+          eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+          voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+          amet.
+        </p>
+      </div>
+		</aside>
+	</body>
+</html>
