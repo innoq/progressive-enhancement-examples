@@ -4,11 +4,47 @@
 		<link rel="stylesheet" href="https://innoq.style/assets/bundle.css">
 		<style>
 			body {
-				padding: 3rem 5rem;
+				padding: 1rem;
+				max-width: 80rem;
+				margin: auto;
 			}
 
 			ul {
 				margin-bottom: 5rem;
+			}
+
+			@media (min-width: 40rem) {
+				body {
+					padding: 3rem 5rem;
+					display: grid;
+					grid-template-areas:
+						"h1 h1"
+						"HTMLh2 CSSh2"
+						"HTML CSS";
+				}
+
+				h1 {
+					grid-area: h1;
+				}
+
+				h2:first-of-type {
+					grid-area: HTMLh2;
+				}
+
+				ul:first-of-type {
+					grid-area: HTML;
+				}
+
+				h2:nth-of-type(2) {
+					grid-area: CSSh2;
+				}
+
+				ul:nth-of-type(2) {
+					grid-area: CSS;
+
+					display: grid;
+					grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+				}
 			}
 		</style>
 	</head>
@@ -29,7 +65,7 @@
 		</ul>
 
 		<h2>CSS</h2>
-		<ul>
+		<ul role="list">
 			<li><a href="css/grid.html">Grid Layout</a></li>
 			<li><a href="css/sticky.html">Position sticky</a></li>
 			<li><a href="css/supports.html">@supports</a></li>
