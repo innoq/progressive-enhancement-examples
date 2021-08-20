@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			:root {
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+			}
+
+			*, *::before, *::after {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				padding: 3rem 5rem;
+			}
+
+			.h-scroll {
+				min-height: 70vh;
+				display: flex;
+				overflow-x: auto;
+				scroll-snap-type: x mandatory;
+			}
+
+			.h-scroll > * {
+				flex: 1 0 100%;
+				scroll-snap-align: start;
+			}
+
+			p {
+				display: grid;
+				place-items: center;
+				margin: 0;
+				padding: 3rem;
+			}
+
+			p:nth-child(3n+1) {
+				background-color: lightpink;
+			}
+			p:nth-child(3n+2) {
+				background-color: lightblue;
+			}
+			p:nth-child(3n) {
+				background-color: lightgoldenrodyellow;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Scroll Snap on the x-axis</h1>
+		<div class="h-scroll">
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+				eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+				voluptua.
+			</p>
+			<p>
+				At vero eos et accusam et justo duo dolores et ea rebum. Stet
+				clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+				amet.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+				nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+				diam voluptua.
+			</p>
+			<p>
+				At vero eos et accusam et justo duo dolores et ea rebum.
+				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+				sit amet.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+				nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+				diam voluptua.
+			</p>
+			<p>
+				At vero eos et accusam et justo duo dolores et ea rebum.
+				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+				sit amet.
+			</p>
+		</div>
+	</body>
+</html>
