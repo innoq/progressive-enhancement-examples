@@ -39,6 +39,6 @@ block content
 						if !payment.incomplete
 							option(value=payment.id, selected = payment.id === paymentId)=payment.receiver + ', ' + payment.type
 			+button("Choose payment")
-		form(method="post", action="/payments/")
+		form(method="post", action="/payments/", data-hijax="disable")
 			input(type="hidden", name="origin", value="/complaints/" + id + "/wizard?action=reimburse")
 			+button("Create New Payment")
