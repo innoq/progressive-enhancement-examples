@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+			}
+
+			[is=nav-tabs] {
+				margin-top: 3rem;
+			}
+
+			dl {
+				margin-top: 0.5rem;
+			}
+
+			@media (min-width: 40rem) {
+				dl {
+					display: grid;
+					grid-template-columns: max-content 1fr;
+				}
+			}
+
+			dt {
+				font-style: italic;
+				text-transform: uppercase;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Implementing Tabs correctly</h1>
+		<p>
+			This is an example heavily based on the
+			<a href="https://inclusive-components.design/tabbed-interfaces/">Tabbed Interfaces</a>
+			component from <a href="https://heydonworks.com/">Heydon Pickering</a>
+		</p>
+		<p>
+			<h2>Steps for Implementing</h2>
+			<ol>
+				<li>
+					Create fallback styles for when JavaScript is not activated -- Since it doesn't
+					<em>behave</em> like a Tabs component, it is probably better that it not
+					<em>look</em> like one.
+				</li>
+				<li>
+					Create a <code>nav-tabs</code> custom element which changes the
+					<code>role</code> of the necessary elements
+					<ul>
+						<li>the <code>a</code> elements will have role <code>tab</code></li>
+						<li>the <code>li</code> elements will have role <code>presentation</code></li>
+						<li>the <code>ul</code> element will have the role <code>tablist</code></li>
+						<li>
+							the section elements which are referenced by the <code>a</code> elements
+							will have the role <code>tabpanel</code>
+						</li>
+					</ul>
+				</li>
+				<li>
+					Select the first tab (set <code>aria-selected="true"</code>) and hide all of the
+					other tabpanels
+				</li>
+				<li>
+					Add a click handler to each tab which will toggle the current tab shown
+				</li>
+				<li>
+					Implement keyboard interaction according to the
+					<a href="https://www.w3.org/TR/wai-aria-practices/#keyboard-interaction-19">
+						WAI-ARIA authoring practices
+					</a>
+					<dl>
+						<dt>Tab (Keycode: 9)</dt>
+						<dd>
+							When focus moves into the tab list, places focus on the active tab element.
+							When the tab list contains the focus, moves focus to the next element in the
+							page tab sequence outside the tablist, which is typically either the first
+							focusable element inside the tab panel or the tab panel itself.
+							(Hint: implement this using <code>tabindex</code>)
+						</dd>
+						<dt>Left Arrow (Keycode: 37)</dt>
+						<dd>
+							When focus is on a tab element in a horizontal tab list, moves focus to the
+							previous tab. If focus is on the first tab, moves focus to the last tab.
+							Optionally, activates the newly focused tab.
+						</dd>
+						<dt>Right Arrow (Keycode: 39)</dt>
+						<dd>
+							When focus is on a tab element in a horizontal tab list, moves focus to the
+							next tab. If focus is on the last tab element, moves focus to the first tab.
+							Optionally, activates the newly focused tab.
+						</dd>
+					</dl>
+				</li>
+				<li>
+					Improve behavior for screenreader users. The Down Arrow (Keycode: 40) is used by
+					screenreaders to select the next element, and if we are focused on a tab, the
+					next element should be the corresponding tabpanel.
+				</li>
+			</ol>
+		</p>
+
+		<nav is="nav-tabs" aria-labelledby="toc-heading">
+			<h2 id="toc-heading">Table of Contents</h2>
+			<ul role="list">
+				<li>
+					<a id="tab1" href="#section1">Section 1</a>
+				</li>
+				<li>
+					<a id="tab2" href="#section2">Section 2</a>
+				</li>
+				<li>
+					<a id="tab3" href="#section3">Section 3</a>
+				</li>
+				<li>
+					<a id="tab4" href="#section4">Section 4</a>
+				</li>
+			</ul>
+		</nav>
+		<section aria-labelledby="tab1">
+			<h2 id="section1">Section 1</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+				nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+				voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+				kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+				ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy <a
+				href="http://example.org/">eirmod</a> tempor invidunt ut labore et dolore magna
+				aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
+				ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+				dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+				diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+				diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+				clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+				amet.
+			</p>
+
+			<p>
+				Duis autem vel eum iriure dolor in hendrerit in vulputate velit
+				esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+				eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+				delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+				consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+				dolore magna aliquam erat volutpat.
+			</p>
+		</section>
+		<section aria-labelledby="tab2">
+			<h2 id="section2">Section 2</h2>
+			<p>
+				Ut wisi enim ad minim veniam, quis nostrud exerci tation
+				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+				<a href="http://example.com">Duis</a> autem vel eum iriure dolor in hendrerit in
+				vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
+				facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
+				luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+			</p>
+		</section>
+		<section aria-labelledby="tab3">
+			<h2 id="section3">Section 3</h2>
+			<p>
+				Nam liber tempor cum soluta nobis eleifend option congue nihil
+				imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor
+				sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+				ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+				quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+				commodo consequat.
+			</p>
+
+			<p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+				consequat, vel illum dolore eu feugiat nulla facilisis.
+			</p>
+
+			<p>
+				At vero eos et accusam et justo duo dolores et ea rebum. Stet
+				clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+				tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a
+				href="http://example.com">At</a> vero eos et accusam et justo duo dolores et ea
+				rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+				sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam
+				aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et
+				et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum.
+				sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem
+				ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+				invidunt ut labore et dolore magna aliquyam erat.
+			</p>
+
+			<p>
+				Consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+				invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+				et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+				takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+				consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+				dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+				duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+				elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+				erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+				rebum. Stet clita kasd gubergren, no sea takimata sanctus.
+			</p>
+		</section>
+		<section aria-labelledby="tab4">
+			<h2 id="section4">Section 4</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+				nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+				voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+				kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+				ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+				invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+				et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+				takimata sanctus est <a href="http://example.com">Lorem</a> ipsum dolor sit
+				amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+				eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+				voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+				kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			</p>
+
+			<p>
+				Duis autem vel eum iriure dolor in hendrerit in vulputate velit
+				esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+				eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+				delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+				consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+				dolore magna aliquam erat volutpat.
+			</p>
+
+			<p>
+				Ut wisi enim ad minim veniam, quis nostrud exerci tation
+				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis
+				autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+				consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan
+				et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
+				dolore te feugait nulla facilisi.
+			</p>
+		</section>
+
+		<style>
+			/* TODO */
+		</style>
+		<script>
+			/* TODO */
+		</script>
+
+		<!--
+			SOLUTION:
+
+			<style>
+				ul[role=tablist] {
+					list-style-type: none;
+					margin: 0;
+					padding: 0;
+					display: flex;
+				}
+
+				a[role=tab] {
+					padding: 0.5rem 1rem;
+					text-decoration: none;
+					color: black;
+					display: block;
+				}
+
+				a[role=tab][aria-selected=true] {
+					border: 2px solid black;
+					border-bottom: 0;
+					background-color: white;
+				}
+
+				a[role=tab]:hover {
+					text-decoration: underline;
+				}
+
+				[role=tabpanel] {
+					padding: 1rem;
+					border: 2px solid black;
+					margin-top: -2px;
+				}
+
+				[role=tabpanel] h2 {
+					margin-top: 0;
+				}
+			</style>
+			<script>
+				class NavTabs extends HTMLElement {
+					connectedCallback() {
+						this.classList.add("is-augmented");
+
+						this.querySelector("ul").setAttribute("role", "tablist");
+						this.querySelector("h2").hidden = true;
+						this.querySelectorAll("li").forEach(li => li.setAttribute("role", "presentation"));
+
+						this.tabs = [];
+						this.querySelectorAll("a").forEach(a => {
+							a.setAttribute("role", "tab")
+
+							let panel = document.querySelector(`[aria-labelledby='${a.id}']`);
+							panel.setAttribute("role", "tabpanel");
+							panel.setAttribute("tabindex", "-1");
+
+							let tab = { tab: a, panel: panel };
+							this.tabs.push(tab);
+
+							a.addEventListener("click", () => {
+								this.selected = tab;
+								this.toggleTabs();
+							});
+
+							a.addEventListener("keydown", event => {
+								console.log(event);
+								let currentIndex = this.tabs.indexOf(tab);
+								if (event.keyCode === 37) {
+									let newIndex = currentIndex > 0 ? currentIndex - 1 : this.tabs.length - 1;
+									this.selected = this.tabs[newIndex];
+									this.toggleTabs();
+								}
+								if (event.keyCode === 39) {
+									let newIndex = currentIndex < this.tabs.length - 1 ? currentIndex + 1 : 0;
+									this.selected = this.tabs[newIndex];
+									this.toggleTabs();
+								}
+								if (event.keyCode === 9 || event.keyCode === 40) {
+									event.preventDefault();
+									panel.focus();
+								}
+							});
+						});
+
+						this.selected = this.tabs[0];
+
+						this.toggleTabs();
+					}
+
+					toggleTabs() {
+						this.tabs.forEach(item => {
+							let { panel, tab } = item;
+							if (item !== this.selected) {
+								panel.hidden = true;
+								tab.removeAttribute("aria-selected");
+								tab.setAttribute("tabindex", "-1");
+								return;
+							}
+
+							panel.hidden = false;
+							tab.setAttribute("aria-selected", "true");
+							tab.removeAttribute("tabindex");
+							tab.focus();
+						});
+					}
+				}
+
+				customElements.define("nav-tabs", NavTabs, { extends: 'nav' });
+			</script>
+		-->
+	</body>
+</html>
