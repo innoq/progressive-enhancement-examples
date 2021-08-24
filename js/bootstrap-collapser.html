@@ -18,13 +18,12 @@
 		<h1>Progressively Enhance Bootstrap Collapser</h1>
 
 		<ol>
-			<li>Step 1: Turn off JavaScript & CSS</li>
-			<li>Step 2: Figure out how the JS component is showing / hiding the content</li>
+			<li>Step 1: Turn off JavaScript & CSS to inspect the HTML</li>
+			<li>Step 2: Reactivate JS & figure out how the JS component is showing / hiding the content</li>
 			<li>Step 3: Remove / Hide interactive elements which do not function with JavaScript</li>
 			<li>Step 4: Add in CSS</li>
 			<li>Step 5: Manually add in CSS classes necessary to ensure that all content is visible</li>
-			<li>Step 6: Add JavaScript component to reactivate JavaScript behavior</li>
-			<li>Step 7: Error handling!</li>
+			<li>Step 6: Add JavaScript custom element to reactivate JavaScript behavior</li>
 		</ol>
 
 		<p>
@@ -42,5 +41,49 @@
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+		<!--
+			SOLUTION:
+
+			<p>
+				<bootstrap-collapser>
+					<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" hidden>
+						Link with href
+					</a>
+				</bootstrap-collapser>
+				<bootstrap-collapser>
+					<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" hidden>
+						Button with data-bs-target
+					</button>
+				</bootstrap-collapser>
+			</p>
+			<div class="collapse show" id="collapseExample">
+				<div class="card card-body">
+					Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+				</div>
+			</div>
+
+			<script>
+				class BootstrapCollapser extends HTMLElement {
+					connectedCallback() {
+						this.trigger.removeAttribute("hidden");
+
+						if (this.trigger.getAttribute("aria-expanded") === "false") {
+							this.target.classList.remove("show");
+						}
+					}
+
+					get trigger() {
+						return this.querySelector("a, button");
+					}
+
+					get target() {
+						return document.getElementById(this.trigger.getAttribute("aria-controls"));
+					}
+				}
+
+				customElements.define("bootstrap-collapser", BootstrapCollapser);
+			</script>
+		-->
 	</body>
 </html>
