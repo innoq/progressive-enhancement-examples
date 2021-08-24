@@ -26,6 +26,7 @@
 				text-transform: uppercase;
 			}
 		</style>
+		<script src="//unpkg.com/@ungap/custom-elements/es.js"></script>
 	</head>
 	<body>
 		<h1>Implementing Tabs correctly</h1>
@@ -277,6 +278,11 @@
 				[role=tabpanel] h2 {
 					margin-top: 0;
 				}
+
+				*:focus {
+					outline: none;
+					box-shadow: inset 0 0 0 4px lightBlue;;
+				}
 			</style>
 			<script>
 				class NavTabs extends HTMLElement {
@@ -298,13 +304,13 @@
 							let tab = { tab: a, panel: panel };
 							this.tabs.push(tab);
 
-							a.addEventListener("click", () => {
+							a.addEventListener("click", event => {
+								event.preventDefault();
 								this.selected = tab;
 								this.toggleTabs();
 							});
 
 							a.addEventListener("keydown", event => {
-								console.log(event);
 								let currentIndex = this.tabs.indexOf(tab);
 								if (event.keyCode === 37) {
 									let newIndex = currentIndex > 0 ? currentIndex - 1 : this.tabs.length - 1;
