@@ -1,0 +1,220 @@
+:root {
+	--spacer-xxs: 0.25rem;
+	--spacer-xs: 0.5rem;
+	--spacer-sm: 0.75rem;
+	--spacer-base: 1.25rem;
+	--spacer-md: 2rem;
+	--spacer-lg: 3.25rem;
+	--spacer-xl: 5.25rem;
+
+	--bg-color: #ebf4ff;
+	--book-bg-color: white;
+	--btn-bg-color: #a3bffa;
+	--text-color: #1a202c;
+	--text-color-accent: #4a5568;
+	--rating-color: #FBBF24;
+	--rating-color-bg: #E5E7EB;
+	--focus-color: #5a67d899;
+	--invalid-color: #F24236;
+	--invalid-color-transparent: #F242367D;
+
+	--box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	color: var(--text-color);
+	margin: 0;
+}
+
+*:focus {
+	outline: 2px solid var(--focus-color);
+}
+
+h1, h2 {
+	margin-top: 0;
+	margin-bottom: var(--spacer-md);
+}
+
+.books,
+.create-book {
+	padding: var(--spacer-md) var(--spacer-base);
+}
+
+.books {
+	background-color: var(--bg-color);
+}
+
+@media (min-width: 40rem) {
+	body {
+		display: grid;
+		grid-template-columns: 1fr max-content;
+		min-height: 100vh;
+	}
+
+	.books,
+	.create-book {
+		padding: var(--spacer-lg);
+	}
+}
+
+.books ul {
+	list-style: none;
+}
+
+.book {
+	border: 1px solid var(--border-color);
+	background-color: var(--book-bg-color);
+	padding: var(--spacer-base);
+	box-shadow: var(--box-shadow-md);
+}
+
+.book + .book {
+	margin-top: var(--spacer-base);
+}
+
+.book .title dt,
+.book .rating dt,
+.book .discountedPrice dt,
+.book .originalPrice dt,
+.book .price dt {
+	/* VISUALLY HIDDEN CSS */
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+ul, dd {
+	padding: 0;
+	margin: 0;
+}
+
+.book dl > * + * {
+	margin-top: var(--spacer-sm);
+}
+
+.book .title {
+	font-size: var(--spacer-base);
+	margin-bottom: var(--spacer-xxs);
+}
+
+.book .author {
+	display: flex;
+	margin-top: var(--spacer-xxs);
+}
+
+.book .author dt::after {
+	content: ":";
+	margin-right: var(--spacer-xs);
+}
+
+.book .rating {
+	display: flex;
+	filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.20));
+	color: var(--text-color-accent);
+	align-items: end;
+}
+
+.book .rating::before {
+	--rating-color-percent: calc(var(--rating, 0) * 20%);
+	content: "";
+	display: inline-block;
+	background-color: var(--rating-color);
+	background: linear-gradient(to right, var(--rating-color),
+		var(--rating-color) var(--rating-color-percent), var(--rating-color-bg) var(--rating-color-percent), var(--rating-color-bg));
+	-webkit-mask-image: url(/images/5_stars.svg);
+	mask-image: url(/images/5_stars.svg);
+	height: 1.5rem;
+	width: 7rem;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	margin-right: var(--spacer-xs);
+}
+
+.book .discountedPrice,
+.book .originalPrice {
+	display: inline-block;
+}
+
+.book .discountedPrice,
+.book .price {
+	font-size: var(--spacer-base);
+}
+
+.book .discountedPrice ins {
+	text-decoration: none;
+}
+
+.book .originalPrice {
+	margin-left: var(--spacer-xs);
+	font-size: var(--spacer-sm);
+}
+
+.book .isbn {
+	display: flex;
+	font-size: var(--spacer-sm);
+	color: var(--text-color-accent);
+	margin-top: var(--spacer-xs);
+}
+
+.book .isbn dt::after {
+	content: ":";
+	margin-right: var(--spacer-xxs);
+}
+
+label {
+	margin-bottom: var(--spacer-xxs);
+	display: block;
+}
+
+input,
+button {
+	padding: var(--spacer-xs) var(--spacer-sm);
+	border: 1px solid var(--text-color-accent);
+}
+
+input {
+	display: block;
+	width: 100%;
+}
+
+input:invalid,
+.has-error {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right var(--spacer-xs) center;
+	padding-right: calc(var(--spacer-base) + var(--spacer-xs));
+	border-color: var(--invalid-color);
+
+}
+
+input:invalid:focus,
+.has-error:focus {
+	outline: 2px solid #F2423630;
+}
+
+.error {
+	color: var(--invalid-color);
+}
+
+button {
+	background-color: var(--btn-bg-color);
+	display: block;
+}
+
+input + label,
+.error + label,
+input + button,
+.error + button {
+	margin-top: var(--spacer-base);
+}

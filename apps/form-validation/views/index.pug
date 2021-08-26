@@ -1,0 +1,63 @@
+extends layout
+
+block content
+	section(class="books")
+		h1 Books
+		ul
+			each book in books
+				li(class="book")
+					dl
+						div(class="title")
+							dt Title
+							dd=book.title
+						div(class="author")
+							dt Author
+							dd=book.author
+						div(class="rating", style="--rating: " + book.rating + ";")
+							dt Rating
+							dd=book.formattedRating
+						if book.discountedPrice
+							div(class="discountedPrice")
+								dt Price
+								dd
+									ins=book.discountedPrice
+							div(class="originalPrice")
+								dt Original Price
+								dd
+									del=book.formattedPrice
+						else if book.price
+							div(class="price")
+								dt Price
+								dd=book.formattedPrice
+						div(class="isbn")
+							dt ISBN
+							dd=book.isbn
+	section(class="create-book")
+		h2 Create a New Book
+		form(action="/", method="post")
+			label(for="title") Title
+			input(id="title", name="title", type="text",
+				class=errors.title ? "has-error" : null, aria-describedby=errors.title ? "error-title" : null)
+			if (errors.title)
+				small(class="error", id="error-title")=errors.title
+			label(for="author") Author
+			input(id="author", name="author", type="text",
+				class=errors.author ? "has-error" : null, aria-describedby=errors.author ? "error-author" : null)
+			if (errors.author)
+				small(class="error", id="error-author")=errors.author
+			label(for="price") Price in EUR
+			input(id="price", name="price", type="number", step="0.01", min="0.01",
+				class=errors.price ? "has-error" : null, aria-describedby=errors.price ? "error-price" : null)
+			if (errors.price)
+				small(class="error", id="error-price")=errors.author
+			label(for="discount") Discount (optional)
+			input(id="discount", name="discount", type="number", step="0.01", min="0",
+				class=errors.discount ? "has-error" : null, aria-describedby=errors.discount ? "error-discount" : null)
+			if (errors.discount)
+				small(class="error", id="error-discount")=errors.discount
+			label(for="isbn") ISBN
+			input(id="isbn", name="isbn", type="text",
+				class=errors.isbn ? "has-error" : null, aria-describedby=errors.isbn ? "error-isbn" : null)
+			if (errors.isbn)
+				small(class="error", id="error-isbn")=errors.isbn
+			button Create Book
