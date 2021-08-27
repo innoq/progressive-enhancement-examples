@@ -2,62 +2,74 @@ extends layout
 
 block content
 	section(class="books")
-		h1 Books
+		h1 Bücher
 		ul
 			each book in books
 				li(class="book")
 					dl
 						div(class="title")
-							dt Title
+							dt Titel
 							dd=book.title
 						div(class="author")
-							dt Author
+							dt Autor
 							dd=book.author
 						div(class="rating", style="--rating: " + book.rating + ";")
-							dt Rating
+							dt Bewertung
 							dd=book.formattedRating
 						if book.discountedPrice
 							div(class="discountedPrice")
-								dt Price
+								dt Preis
 								dd
 									ins=book.discountedPrice
 							div(class="originalPrice")
-								dt Original Price
+								dt Originalpreis
 								dd
 									del=book.formattedPrice
 						else if book.price
 							div(class="price")
-								dt Price
+								dt Preis
 								dd=book.formattedPrice
 						div(class="isbn")
 							dt ISBN
 							dd=book.isbn
 	section(class="create-book")
-		h2 Create a New Book
-		form(action="/", method="post")
-			label(for="title") Title
+		h2 Erstelle ein neues Buch
+		if (hasErrors)
+			p(id="errors", class="errors")
+				Bitte korrigieren Sie die angegeben Fehlern!
+		form(action="/", method="post", is="form-validator", data-validation-uri="/validate-book")
+			label(for="title") Titel
 			input(id="title", name="title", type="text",
-				class=errors.title ? "has-error" : null, aria-describedby=errors.title ? "error-title" : null)
-			if (errors.title)
-				small(class="error", id="error-title")=errors.title
-			label(for="author") Author
+				class=fields.title.error ? "has-error" : null,
+				aria-describedby=fields.title.error ? "error-title" : null,
+				value=fields.title.value,
+				required)
+			small(class="error", id="error-title", aria-live="polite")=fields.title.error
+			label(for="author") Autor
 			input(id="author", name="author", type="text",
-				class=errors.author ? "has-error" : null, aria-describedby=errors.author ? "error-author" : null)
-			if (errors.author)
-				small(class="error", id="error-author")=errors.author
-			label(for="price") Price in EUR
-			input(id="price", name="price", type="number", step="0.01", min="0.01",
-				class=errors.price ? "has-error" : null, aria-describedby=errors.price ? "error-price" : null)
-			if (errors.price)
-				small(class="error", id="error-price")=errors.author
-			label(for="discount") Discount (optional)
-			input(id="discount", name="discount", type="number", step="0.01", min="0",
-				class=errors.discount ? "has-error" : null, aria-describedby=errors.discount ? "error-discount" : null)
-			if (errors.discount)
-				small(class="error", id="error-discount")=errors.discount
+				class=fields.author.error ? "has-error" : null,
+				aria-describedby=fields.author.error ? "error-author" : null,
+				value=fields.author.value,
+				required)
+			small(class="error", id="error-author")=fields.author.error
+			label(for="price") Preis in EUR
+			input(id="price", name="price", type="number", step="0.01", min="0.01"
+				class=fields.price.error ? "has-error" : null,
+				aria-describedby=fields.price.error ? "error-price" : null,
+				value=fields.price.value,
+				required)
+			small(class="error", id="error-price", aria-live="polite")=fields.price.error
+			label(for="discount") Rabatt (optional)
+			input(id="discount", name="discount", type="number", step="0.01", min="0", max="100"
+				class=fields.discount.error ? "has-error" : null,
+				aria-describedby=fields.discount.error ? "error-discount" : null,
+				value=fields.discount.value)
+			small(class="error", id="error-discount", aria-live="polite")=fields.discount.error
 			label(for="isbn") ISBN
 			input(id="isbn", name="isbn", type="text",
-				class=errors.isbn ? "has-error" : null, aria-describedby=errors.isbn ? "error-isbn" : null)
-			if (errors.isbn)
-				small(class="error", id="error-isbn")=errors.isbn
-			button Create Book
+				class=fields.isbn.error ? "has-error" : null,
+				aria-describedby=fields.isbn.error ? "error-isbn" : null,
+				value=fields.isbn.value,
+				required)
+			small(class="error", id="error-isbn", aria-live="polite")=fields.isbn.error
+			button(aria-describedby=hasErrors ? "errors" : null) Buch erstellen
