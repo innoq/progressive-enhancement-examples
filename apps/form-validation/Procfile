@@ -1,1 +1,1 @@
-app: PORT=3000 node ./bin/www
+app: node ./bin/www
