@@ -65,14 +65,14 @@ class FormValidator extends HTMLFormElement {
 	}
 
 	addListenerForInput(input) {
-		input.addEventListener("keyup", debounce(300, event => {
+		input.addEventListener("keyup", debounce(500, event => {
 			let inputField = event.target;
 
 			if (event.keyCode === 9) { // Prevent validation directly when the user tabs into the field
 				return;
 			}
 
-			/* POSSIBLE SOLUTION:
+			/* POSSIBLE SOLUTION:	*/
 
 			fetch(this.validationUri + "?" + serializeForm(inputField.closest('form')))
 				.then(res => res.text())
@@ -97,7 +97,7 @@ class FormValidator extends HTMLFormElement {
 						replaceNode(document.getElementById(newError.id), newError);
 					}
 				});
-			*/
+
 		}));
 	}
 
