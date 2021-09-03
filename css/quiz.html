@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+	</head>
+	<body>
+		<header>
+			<h1>CSS Quiz</h1>
+			<p>Can you define CSS rules to perform the following tasks?</p>
+		</header>
+		<main>
+			<h2>Main Content</h2>
+			<ol>
+				<li>
+					Modify this layout so that <em>for screens larger than 40rem</em>
+					the secondary information is shown to the right?
+				</li>
+				<li>
+					Increase the height of this main content area so that it fills the
+					available vertical space in the viewport
+				</li>
+				<li>
+					Modify the layout so that the sidebar area takes up only 25% of the
+					available space
+				</li>
+				<li>
+					Modify the sidebar so that it remains stuck to the top when the user
+					scrolls down
+				</li>
+				<li>
+					Modify the footer so that it remains stuck to the bottom when there
+					is not enough space for it in the viewport
+				</li>
+				<li>
+					Make the following element into a perfect square with a <em>background-color</em>
+					of <em>peachpuff</em>
+					<div class="box">Box</div>
+				</li>
+				<li>
+					Center the "Box" text within the box
+				</li>
+				<li>
+					Add a dark mode to the layout to change the text to <em>white</em>, the background
+					to <em>black</em> and the box color to <em>teal</em>
+				</li>
+				<li>
+					Turn the following boxes into a carosel of images which the user can scroll through
+					horizontally
+					<div class="carosel">
+						<div class="box">Box 1</div>
+						<div class="box">Box 2</div>
+						<div class="box">Box 3</div>
+					</div>
+				</li>
+				<li>
+					Modify the circle to make it look like a perfect circle and center the content
+					within it
+				</li>
+				<li>Modify the text in the sidebar area so that it flows around the circle</li>
+			</ol>
+		</main>
+		<aside>
+			<h2>Secondary Information</h2>
+			<div class="circle">
+				Circle
+			</div>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+				eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+				voluptua.
+			</p>
+		</aside>
+		<footer>
+			<h2>Footer</h2>
+		</footer>
+
+		<!-- POSSIBLE SOLUTION
+			<style>
+			:root {
+				--box-color: peachpuff;
+				--background-color: white;
+				--color: black;
+				--box-width: clamp(5rem, 50%, 20rem);
+			}
+
+			*, *::before, *::after {
+				box-sizing: border-box;
+			}
+
+			@media (prefer-color-scheme: 'dark') {
+				:root {
+					--box-color: teal;
+					--background-color: black;
+					--color: white;
+				}
+			}
+
+			[data-theme='dark'] {
+				--box-color: teal;
+				--background-color: black;
+				--color: white;
+			}
+
+			body {
+				margin: 0;
+				padding: 1rem;
+				color: var(--color);
+				background-color: var(--background-color);
+			}
+
+			.box {
+				display: grid;
+				place-items: center;
+				background-color: var(--box-color);
+				width: clamp(5rem, 50%, 20rem);
+				aspect-ratio: 1 / 1;
+			}
+
+			.carosel {
+				display: flex;
+				gap: 0.5rem;
+				max-width: 20rem;
+				overflow-x: auto;
+				scroll-snap-type: x mandatory;
+			}
+
+			.carosel > * {
+				flex: 0 0 20rem;
+				scroll-snap-align: start;
+			}
+
+			.circle {
+				display: grid;
+				place-items: center;
+				background-color: var(--box-color);
+				width: 7rem;
+				aspect-ratio: 1 / 1;
+				border-radius: 50%;
+				float: left;
+				margin: 1rem;
+				shape-outside: circle();
+			}
+
+			@media (min-width: 40rem) {
+				body {
+					display: grid;
+					grid-template-areas:
+						"header header"
+						"main sidebar"
+						"footer footer";
+					grid-template-columns: 3fr 1fr;
+					grid-template-rows: auto 1fr auto;
+					min-height: 100vh;
+				}
+
+				body > * {
+					padding: 1rem;
+					border: 2px solid var(--color);
+				}
+
+				body > header {
+					grid-area: header;
+				}
+
+				body > main {
+					grid-area: main;
+				}
+
+				body > aside {
+					grid-area: sidebar;
+					position: sticky;
+					top: 0;
+					background-color: var(--background-color);
+					max-height: 100vh;
+				}
+
+				body > footer {
+					grid-area: footer;
+					position: sticky;
+					bottom: 0;
+					background-color: var(--background-color);
+				}
+			}
+		</style> -->
+	</body>
+</html>
