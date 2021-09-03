@@ -53,19 +53,21 @@ block content
 				required)
 			small(class="error", id="error-author")=fields.author.error
 			label(for="price") Preis in EUR
-			input(id="price", name="price", type="number", step="0.01", min="0.01"
+			input(id="price", name="price", type="number", min="0.01", step="any"
 				class=fields.price.error ? "has-error" : null,
 				aria-describedby=fields.price.error ? "error-price" : null,
 				value=fields.price.value,
 				required)
 			small(class="error", id="error-price", aria-live="polite")=fields.price.error
 			label(for="discount") Rabatt (optional)
-			input(id="discount", name="discount", type="number", step="0.01", min="0", max="100"
+			input(id="discount", name="discount", type="number", step="any", min="0", max="100"
 				class=fields.discount.error ? "has-error" : null,
 				aria-describedby=fields.discount.error ? "error-discount" : null,
 				value=fields.discount.value)
 			small(class="error", id="error-discount", aria-live="polite")=fields.discount.error
-			label(for="isbn") ISBN
+			label(for="isbn")
+				| ISBN
+				small 10 oder 13 stellige internationale Standardbuchnummer
 			input(id="isbn", name="isbn", type="text",
 				class=fields.isbn.error ? "has-error" : null,
 				aria-describedby=fields.isbn.error ? "error-isbn" : null,

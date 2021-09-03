@@ -186,6 +186,11 @@ label {
 	display: block;
 }
 
+label small {
+	margin-top: var(--spacer-xxs);
+	display: block;
+}
+
 input,
 button {
 	padding: var(--spacer-xs) var(--spacer-sm);
