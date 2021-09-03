@@ -32,20 +32,25 @@
 					is not enough space for it in the viewport
 				</li>
 				<li>
-					Make the following element into a perfect square with a <em>background-color</em>
-					of <em>peachpuff</em>
+					Make the following element into a perfect square with a
+					<em>background-color</em> of <em>peachpuff</em>. The square should be
+					between <em>5rem</em> and <em>20rem</em> wide.
 					<div class="box">Box</div>
+				</li>
+				<li>
+					Define a fallback for the square for browsers which do not support the
+					CSS defined in the previous rule
 				</li>
 				<li>
 					Center the "Box" text within the box
 				</li>
 				<li>
-					Add a dark mode to the layout to change the text to <em>white</em>, the background
-					to <em>black</em> and the box color to <em>teal</em>
+					Add a dark mode to the layout to change the text to <em>white</em>,
+					the background to <em>black</em> and the box color to <em>teal</em>
 				</li>
 				<li>
-					Turn the following boxes into a carosel of images which the user can scroll through
-					horizontally
+					Turn the following boxes into a carosel of images which the user can
+					scroll through horizontally
 					<div class="carosel">
 						<div class="box">Box 1</div>
 						<div class="box">Box 2</div>
@@ -56,7 +61,9 @@
 					Modify the circle to make it look like a perfect circle and center the content
 					within it
 				</li>
-				<li>Modify the text in the sidebar area so that it flows around the circle</li>
+				<li>
+					Modify the text in the sidebar area so that it flows around the circle
+				</li>
 			</ol>
 		</main>
 		<aside>
@@ -73,9 +80,8 @@
 		<footer>
 			<h2>Footer</h2>
 		</footer>
-
 		<!-- POSSIBLE SOLUTION
-			<style>
+		<style>
 			:root {
 				--box-color: peachpuff;
 				--background-color: white;
@@ -111,9 +117,19 @@
 			.box {
 				display: grid;
 				place-items: center;
+				background-color: peachpuff;
 				background-color: var(--box-color);
-				width: clamp(5rem, 50%, 20rem);
-				aspect-ratio: 1 / 1;
+				width: 5rem;
+				height: 5rem;
+				text-align: center;
+			}
+
+			@supports (aspect-ratio: 1 / 1) {
+				.box {
+					width: clamp(5rem, 50%, 20rem);
+					height: auto;
+					aspect-ratio: 1 / 1;
+				}
 			}
 
 			.carosel {
@@ -181,6 +197,7 @@
 					background-color: var(--background-color);
 				}
 			}
-		</style> -->
+		</style>
+		-->
 	</body>
 </html>
