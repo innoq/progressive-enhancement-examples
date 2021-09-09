@@ -1,0 +1,19 @@
+{
+  "name": "example-pattern-library",
+  "version": "0.1.0",
+  "dependencies": {
+    "@frctl/fractal": "^1.5.11"
+  },
+  "scripts": {
+    "start": "npm-run-all --parallel fractal:start faucet:watch",
+    "fractal:start": "fractal start --sync",
+    "fractal:build": "fractal build",
+    "faucet": "faucet --compact",
+    "faucet:watch": "faucet --watch"
+  },
+  "devDependencies": {
+    "faucet-pipeline-js": "^2.1.7",
+    "faucet-pipeline-sass": "^1.7.0",
+    "npm-run-all": "^4.1.5"
+  }
+}
