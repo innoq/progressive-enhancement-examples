@@ -72,31 +72,31 @@ class FormValidator extends HTMLFormElement {
 				return;
 			}
 
-			/* POSSIBLE SOLUTION:	*/
+			// /* POSSIBLE SOLUTION:	*/
 
-			fetch(this.validationUri + "?" + serializeForm(inputField.closest('form')))
-				.then(res => res.text())
-				.then(html => {
+			// fetch(this.validationUri + "?" + serializeForm(inputField.closest('form')))
+			// 	.then(res => res.text())
+			// 	.then(html => {
 
-					let newDocument = html2dom(html);
+			// 		let newDocument = html2dom(html);
 
-					let newInput = newDocument.getElementById(inputField.id);
+			// 		let newInput = newDocument.getElementById(inputField.id);
 
-					let oldError = document.getElementById(inputField.getAttribute("aria-describedby"));
-					let newError = newDocument.getElementById(newInput.getAttribute("aria-describedby"));
+			// 		let oldError = document.getElementById(inputField.getAttribute("aria-describedby"));
+			// 		let newError = newDocument.getElementById(newInput.getAttribute("aria-describedby"));
 
-					inputField.classList = newInput.classList;
+			// 		inputField.classList = newInput.classList;
 
-					if (oldError && newError) {
-						replaceNode(oldError, newError);
-					} else if (oldError) {
-						inputField.removeAttribute("aria-describedby");
-						oldError.innerHTML = "";
-					} else if (newError) {
-						inputField.setAttribute("aria-describedby", newError.id);
-						replaceNode(document.getElementById(newError.id), newError);
-					}
-				});
+			// 		if (oldError && newError) {
+			// 			replaceNode(oldError, newError);
+			// 		} else if (oldError) {
+			// 			inputField.removeAttribute("aria-describedby");
+			// 			oldError.innerHTML = "";
+			// 		} else if (newError) {
+			// 			inputField.setAttribute("aria-describedby", newError.id);
+			// 			replaceNode(document.getElementById(newError.id), newError);
+			// 		}
+			// 	});
 
 		}));
 	}
