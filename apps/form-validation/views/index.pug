@@ -38,40 +38,39 @@ block content
 			p(id="errors", class="errors")
 				Bitte korrigieren Sie die angegeben Fehlern!
 		form(action="/", method="post", is="form-validator", data-validation-uri="/validate-book")
-			label(for="title") Titel
+			label(for="title")
+				| Titel
+				small(class="error", id="error-title", aria-live="polite")=fields.title.error
 			input(id="title", name="title", type="text",
-				class=fields.title.error ? "has-error" : null,
-				aria-describedby=fields.title.error ? "error-title" : null,
+				aria-invalid=fields.title.error ? "true" : "false",
 				value=fields.title.value,
 				required)
-			small(class="error", id="error-title", aria-live="polite")=fields.title.error
-			label(for="author") Autor
+			label(for="author")
+				| Autor
+				small(class="error", id="error-author")=fields.author.error
 			input(id="author", name="author", type="text",
-				class=fields.author.error ? "has-error" : null,
-				aria-describedby=fields.author.error ? "error-author" : null,
+				aria-invalid=fields.author.error ? "true" : "false",
 				value=fields.author.value,
 				required)
-			small(class="error", id="error-author")=fields.author.error
-			label(for="price") Preis in EUR
+			label(for="price")
+				| Preis in EUR
+				small(class="error", id="error-price", aria-live="polite")=fields.price.error
 			input(id="price", name="price", type="number", min="0.01", step="any"
-				class=fields.price.error ? "has-error" : null,
-				aria-describedby=fields.price.error ? "error-price" : null,
+				aria-invalid=fields.price.error ? "true" : "false",
 				value=fields.price.value,
 				required)
-			small(class="error", id="error-price", aria-live="polite")=fields.price.error
-			label(for="discount") Rabatt (optional)
+			label(for="discount")
+				| Rabatt (optional)
+				small(class="error", id="error-discount", aria-live="polite")=fields.discount.error
 			input(id="discount", name="discount", type="number", step="any", min="0", max="100"
-				class=fields.discount.error ? "has-error" : null,
-				aria-describedby=fields.discount.error ? "error-discount" : null,
+				aria-invalid=fields.discount.error ? "true" : "false",
 				value=fields.discount.value)
-			small(class="error", id="error-discount", aria-live="polite")=fields.discount.error
 			label(for="isbn")
 				| ISBN
 				small 10 oder 13 stellige internationale Standardbuchnummer
+				small(class="error", aria-live="polite")=fields.isbn.error
 			input(id="isbn", name="isbn", type="text",
-				class=fields.isbn.error ? "has-error" : null,
-				aria-describedby=fields.isbn.error ? "error-isbn" : null,
+				aria-invalid=fields.isbn.error ? "true" : "false",
 				value=fields.isbn.value,
 				required)
-			small(class="error", id="error-isbn", aria-live="polite")=fields.isbn.error
 			button(aria-describedby=hasErrors ? "errors" : null) Buch erstellen
