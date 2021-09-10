@@ -200,3 +200,27 @@ pattern library in order to get a feeling for how developing UI components
 within a pattern library works.
 
 [Fractal]: https://fractal.build/
+
+
+## Navigation with the History API
+
+For this exercise, we need to start the complaints application:
+
+    cd /apps/complaints
+    npm install
+    npm start
+
+For this exercise, we want to intercept all link clicks and submit them
+asynchronously using the fetch API. Once that is completed, we want to replace
+the current content of the page with what we receive from the server and
+communicate the page change to the browser using the History API.
+
+To implement this exercise, we will be editing the
+`./lib/scripts/enhance-links.js` file.
+
+The goals of this exercise is to illustrate browser APIs that may be helpful
+when performing AJAX requests with progressive enhancement. In practice, it
+may be preferable to use a library like [Turbo Drive] to do this so we don't
+have to roll our own.
+
+[Turbo Drive]: https://turbo.hotwired.dev/handbook/drive
