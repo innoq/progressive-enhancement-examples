@@ -1,8 +1,11 @@
 include ../icon/mixin.pug
 
-mixin navitem(href, label, current, icon)
+mixin navitem(href, label, current, icon, indicator, indicatorId, indicatorText)
 	li
-		a(href=href, aria-current=current === true ? "page" : current)
+		a(href=href, aria-current=current === true ? 'page' : current, aria-describedby=indicatorId)
 			if icon
 				+icon(icon)
 			| #{label}
+		if indicator
+			embedded-link
+				a(href=indicator, class="visually-hidden")=indicatorText

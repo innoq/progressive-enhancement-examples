@@ -52,6 +52,14 @@ app.post("/complaints/", (req, res) => {
 	}
 })
 
+app.get("/number-of-open-complaints", (req, res) => {
+	let visuallyHidden = req.query.visuallyHidden;
+	let id = req.query.id || 'nrOfComplaints';
+	let number = complaints.filter(complaint => !complaint.response).length;
+
+	res.render("complaints/number-of-complaints", { number, visuallyHidden, id });
+});
+
 app.get("/complaints/:complaintId", (req, res) => {
 	let complaint = findComplaint(req);
 

@@ -114,6 +114,22 @@ An example CSS layout is available in the `example-css-layout` branch of this
 repository.
 
 
+## Implement a JavaScript component to embed the content of a link in a page
+
+For this exercise, we need to start the complaints application
+
+    cd /apps/complaints
+    npm install
+    npm start
+
+On the Complaints home page, there are two instances where there is a link to
+the current number of open complaints. We want to add a layer of progressive
+enhancement to the application so that the link will be retrieved via AJAX and
+the content of the link will be embedded directly into the page.
+
+The goal of this exercise is to showcase Custom Elements and the Fetch API.
+
+
 ## Tweaking an existing JavaScript component to make it progressively enhanced
 
 This exercise is available at the following URL:
