@@ -5,29 +5,72 @@
 		<p>Can you find one or more HTML elements to implement the following tasks?</p>
 
 		<h2>A Datepicker</h2>
+		<input type="date">
 
 		<h2>An element to collect a <em>monetary amount</em> from a user</h2>
+		<input type="number" step="any">
 
 		<h2>An element to collect a <em>monetary amount</em> from a user using German format for numbers</h2>
+		<form>
+			<input lang="de" type="number" step="any" value="6.5" >
+		</form>
 
 		<h2>A Timepicker</h2>
+		<input type="time">
 
 		<h2>An element where the user can select multiple options</h2>
+		<select multiple>
+			<option>A</option>
+			<option>B</option>
+		</select>
+
+		<label><input type="checkbox" name="a"> A</label>
+		<label><input type="checkbox" name="a"> B</label>
 
 		<h2>An element to collapse or expand a section of code</h2>
+		<details style="border: 1px solid black; padding: 1rem; max-width: 200px;">
+			<summary style="border: 1px solid black; padding: 1rem; max-width: 200px;">Title</summary>
+			:D
+		</details>
 
 		<h2>An textbox for choosing a fruit or vegetable with autocomplete</h2>
 
+		<input list="datalist">
+		<datalist id="datalist">
+			<option>Apple</option>
+			<option>Banana</option>
+		</datalist>
+
 		<h2>An element which the user <em>must</em> fill out</h2>
+		<form>
+			<input required>
+		</form>
 
 		<h2>An element to collect a <em>monetary amount</em> which is positive</h2>
+		<form>
+			<input lang="de" type="number" step="any" value="6.5" min="0.01">
+		</form>
 
 		<h2>An element where the user can select exactly one option</h2>
+		<label><input type="radio" name="b"> A</label>
+		<label><input type="radio" name="b"> B</label>
 
 		<h2>An element to collect a <em>percent</em> value</h2>
+		<form>
+			<input type="number" max="100" min="0">
+		</form>
 
 		<h2>An element which shows one picture for small viewports and another for large viewports</h2>
+		<picture>
+			<source srcset="../images/large.jpg" media="(min-width: 40rem)">
+			<img src="../images/small.jpg" alt="A cute puppy">
+		</picture>
 
 		<h2>An element to show a list of links only when JavaScript is <em>not available</em></h2>
+		<noscript>
+			<ul>
+				<li><a href="#">Link</a></li>
+			</ul>
+		</noscript>
 	</body>
 </html>
