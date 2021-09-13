@@ -1,7 +1,105 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<style>
+			*, *::before, *::after {
+				box-sizing: border-box;
+			}
 
+			:root {
+				--spacer-xs: 0.25rem;
+				--spacer-sm: 0.5rem;
+				--spacer-base: 0.75rem;
+				--spacer-md: 1.25rem;
+				--spacer-lg: 2rem;
+
+				--border-color: white;
+				--background-color: black;
+				--box-color: teal;
+			}
+
+			@media (prefers-color-scheme: light) {
+				:root {
+					--border-color: black;
+					--background-color: white;
+					--box-color: peachpuff;
+				}
+			}
+
+			body {
+				min-height: 100vh;
+				margin: 0;
+				padding: var(--spacer-md);
+			}
+
+			body > * {
+				border: 2px solid var(--border-color);
+				background-color: var(--background-color);
+				padding: var(--spacer-md);
+				color: var(--border-color);
+			}
+
+			.box {
+				display: grid;
+				place-items: center;
+				width: 5rem;
+				min-height: 5rem;
+				background-color: var(--box-color);
+			}
+
+			.circle {
+				background-color: var(--box-color);
+				width: clamp(5rem, 50%, 10rem);
+				aspect-ratio: 1 / 1;
+				border-radius: 50%;
+				display: grid;
+				place-items: center;
+				float: left;
+				shape-outside: circle();
+			}
+
+			@supports (aspect-ratio: 1 / 1) {
+				.box {
+					width: clamp(5rem, 50%, 10rem);
+					aspect-ratio: 1 / 1;
+				}
+			}
+
+			@media (min-width: 40rem) {
+				body {
+					display: grid;
+					grid-template-areas:
+						"header header"
+						"main sidebar"
+						"footer footer";
+					grid-template-rows: auto 1fr auto;
+					grid-template-columns: 0.75fr 0.25fr;
+				}
+
+				body > header {
+					grid-area: header;
+				}
+
+				body > main {
+					grid-area: main;
+				}
+
+				body > aside {
+					grid-area: sidebar;
+					position: sticky;
+					top: 0;
+					background-color: var(--background-color);
+					z-index: 1;
+				}
+
+				body > footer {
+					grid-area: footer;
+					position: sticky;
+					bottom: 0;
+					background-color: var(--background-color);
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<header>
