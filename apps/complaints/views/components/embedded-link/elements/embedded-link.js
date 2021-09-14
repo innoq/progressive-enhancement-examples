@@ -1,19 +1,17 @@
 export class EmbeddedLink extends HTMLElement {
+	connectedCallback() {
+		this.replaceLink(this.link);
+	}
 
-	// /* POSSIBLE SOLUTION */
-	// connectedCallback() {
-	// 	if (!this.link) {
-	// 		return;
-	// 	}
+	replaceLink(a) {
+		fetch(a.href)
+			.then(response => response.text())
+			.then(html => {
+				a.outerHTML = html;
+			});
+	}
 
-	// 	fetch(this.link.href)
-	// 		.then(response => response.text())
-	// 		.then(html => {
-	// 			this.outerHTML = html;
-	// 		});
-	// }
-
-	// get link() {
-	// 	return this.querySelector("a");
-	// }
+	get link() {
+		return this.querySelector("a");
+	}
 }
