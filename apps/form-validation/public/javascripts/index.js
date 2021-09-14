@@ -72,19 +72,18 @@ class FormValidator extends HTMLFormElement {
 				return;
 			}
 
-			// /* POSSIBLE SOLUTION */
-			// fetch(this.validationUri + "?" + serializeForm(inputField.closest('form')))
-			// 	.then(response => response.text())
-			// 	.then(html => {
-			// 		let dom = html2dom(html);
+			fetch(this.validationUri + "?" + serializeForm(inputField.closest("form")))
+				.then(response => response.text())
+				.then(html => {
 
-			// 		let newInputField = dom.getElementById(inputField.id);
-			// 		let label = document.querySelector(`[for=${inputField.id}]`);
-			// 		let newLabel = dom.querySelector(`[for=${inputField.id}]`);
+					let dom = html2dom(html);
+					let newInputField = dom.getElementById(inputField.id);
+					inputField.setAttribute("aria-invalid", newInputField.getAttribute("aria-invalid"));
+					let label = document.querySelector(`[for="${inputField.id}"]`);
+					label.innerHTML = dom.querySelector(`[for="${inputField.id}"]`).innerHTML;
 
-			// 		inputField.setAttribute("aria-invalid", newInputField.getAttribute("aria-invalid"));
-			// 		replaceNode(label, newLabel);
-			// 	});
+				});
+
 		}));
 	}
 
@@ -98,3 +97,18 @@ class FormValidator extends HTMLFormElement {
 }
 
 customElements.define("form-validator", FormValidator, { extends: 'form' });
+
+
+			// /* POSSIBLE SOLUTION */
+			// fetch(this.validationUri + "?" + serializeForm(inputField.closest('form')))
+			// 	.then(response => response.text())
+			// 	.then(html => {
+			// 		let dom = html2dom(html);
+
+			// 		let newInputField = dom.getElementById(inputField.id);
+			// 		let label = document.querySelector(`[for=${inputField.id}]`);
+			// 		let newLabel = dom.querySelector(`[for=${inputField.id}]`);
+
+			// 		inputField.setAttribute("aria-invalid", newInputField.getAttribute("aria-invalid"));
+			// 		replaceNode(label, newLabel);
+			// 	});
