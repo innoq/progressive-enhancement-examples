@@ -5,29 +5,98 @@
 		<p>Can you find one or more HTML elements to implement the following tasks?</p>
 
 		<h2>A Datepicker</h2>
+		<input type="date" value="2021-04-21">
 
 		<h2>An element to collect a <em>monetary amount</em> from a user</h2>
+		<form>
+			<input type="number" step="0.01">
+		</form>
 
 		<h2>An element to collect a <em>monetary amount</em> from a user using German format for numbers</h2>
+		<form>
+			<input lang="de" type="number" step="any" value="3.5">
+		</form>
 
 		<h2>A Timepicker</h2>
+		<input type="time">
 
 		<h2>An element where the user can select multiple options</h2>
+		<select multiple>
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+		</select>
+
+		<label><input type="checkbox" name="field"> A</label>
+		<label><input type="checkbox" name="field"> B</label>
+		<label><input type="checkbox" name="field"> C</label>
 
 		<h2>An element to collapse or expand a section of code</h2>
+		<details>
+			<summary>Summary Text</summary>
+			Irgendwelche Texte
+		</details>
 
 		<h2>An textbox for choosing a fruit or vegetable with autocomplete</h2>
 
+		<input type="text" list="list">
+		<datalist id="list">
+			<option>A</option>
+			<option>Ba</option>
+			<option>Cca</option>
+		</datalist>
+
 		<h2>An element which the user <em>must</em> fill out</h2>
+		<form>
+			<input required>
+			<button type="submit">Submit</button>
+		</form>
 
 		<h2>An element to collect a <em>monetary amount</em> which is positive</h2>
+		<form>
+			<input lang="de" type="number" step="any" value="3.5" min="0">
+		</form>
 
 		<h2>An element where the user can select exactly one option</h2>
+		<label><input type="radio" name="field"> A</label>
+		<label><input type="radio" name="field"> B</label>
+		<label><input type="radio" name="field"> C</label>
+
+		<select>
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+		</select>
 
 		<h2>An element to collect a <em>percent</em> value</h2>
+		<form>
+			<input type="text" pattern="/\d+\.\d+%">
+		</form>
+		<form>
+			<input type="number" min="0" max="100">
+		</form>
+
 
 		<h2>An element which shows one picture for small viewports and another for large viewports</h2>
+		<img
+			src="../images/small.jpg"
+			srcset="../images/large.jpg 875w"
+			alt="Puppy running outside"
+		>
+
+		<picture>
+			<source srcset="../images/large.jpg" media="(min-width: 40rem)">
+			<img src="../images/small.jpg">
+		</picture>
 
 		<h2>An element to show a list of links only when JavaScript is <em>not available</em></h2>
+		<noscript>
+			<ul>
+				<li><a href="#">A</a></li>
+				<li><a href="#">A</a></li>
+				<li><a href="#">A</a></li>
+			</ul>
+		</noscript>
+
 	</body>
 </html>
