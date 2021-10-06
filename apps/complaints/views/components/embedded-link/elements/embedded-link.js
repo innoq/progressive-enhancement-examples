@@ -1,4 +1,26 @@
 export class EmbeddedLink extends HTMLElement {
+	connectedCallback() {
+		fetch(this.link.href)
+			.then(response => response.text())
+			.then(html => {
+				this.innerHTML = html;
+			});
+	}
+
+	get link() {
+		return this.querySelector("a");
+	}
+}
+
+
+
+
+
+
+
+
+
+
 
 	// /* POSSIBLE SOLUTION */
 	// connectedCallback() {
@@ -16,4 +38,3 @@ export class EmbeddedLink extends HTMLElement {
 	// get link() {
 	// 	return this.querySelector("a");
 	// }
-}

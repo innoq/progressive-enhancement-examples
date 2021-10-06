@@ -3,6 +3,6 @@
 
 
 // /* POSSIBLE SOLUTION */
-// import { EmbeddedLink } from "./elements/embedded-link";
+import { EmbeddedLink } from "./elements/embedded-link";
 
-// customElements.define("embedded-link", EmbeddedLink);
+customElements.define("embedded-link", EmbeddedLink);
