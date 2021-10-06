@@ -1,6 +1,112 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<style>
+			/* .flex-box {
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.flex-box > main {
+				flex-basis: 20rem;
+			}
+			.flex-box > aside {
+				width: min-content;
+			} */
+
+			:root {
+				--box-color: peachpuff;
+				--text-color: black;
+				--background-color: white;
+			}
+
+			body {
+				color: var(--text-color);
+				background-color: var(--background-color);
+			}
+
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--box-color: teal;
+					--text-color: white;
+					--background-color: black;
+				}
+			}
+
+			.box {
+				display: grid;
+				place-items: center;
+				background-color: var(--box-color);
+				width: 10rem;
+				height: 10rem;
+			}
+
+			@supports (aspect-ratio: 1 / 1) {
+				.box {
+					width: clamp(5rem, 50%, 10rem);
+					height: auto;
+					aspect-ratio: 1 / 1;
+				}
+			}
+
+			.carosel {
+				display: flex;
+				max-width: 15rem;
+				overflow-x: auto;
+				gap: 1rem;
+				scroll-snap-type: x mandatory;
+			}
+
+			.circle {
+				display: grid;
+				place-items: center;
+				background-color: var(--box-color);
+				padding: 1rem;
+				width: min-content;
+				aspect-ratio: 1 / 1;
+				border-radius: 50%;
+				float: left;
+				margin: 1rem;
+				shape-outside: circle();
+			}
+
+			.carosel > * {
+				flex: 0 0 15rem;
+				scroll-snap-align: center;
+			}
+
+			@media (min-width: 40rem) {
+				body {
+					display: grid;
+					grid-template-areas:
+						"header header"
+						"main sidebar"
+						"footer footer";
+					grid-template-columns: auto 25%;
+					grid-template-columns: 3fr 1fr;
+					gap: 2rem;
+				}
+
+				body > header {
+					grid-area: header;
+				}
+
+				body > main {
+				}
+
+				body > aside {
+					position: sticky;
+					top: 0;
+				}
+
+				body > footer {
+					grid-area: footer;
+					position: sticky;
+					bottom: 0;
+					background-color: var(--background-color);
+				}
+			}
+
+		</style>
 
 	</head>
 	<body>
@@ -8,6 +114,7 @@
 			<h1>CSS Quiz</h1>
 			<p>Can you define CSS rules to perform the following tasks?</p>
 		</header>
+		<!-- <div class="flex-box"> -->
 		<main>
 			<h2>Main Content</h2>
 			<ol>
@@ -77,6 +184,7 @@
 				voluptua.
 			</p>
 		</aside>
+	<!-- </div> -->
 		<footer>
 			<h2>Footer</h2>
 		</footer>
