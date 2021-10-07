@@ -238,10 +238,92 @@
 		</section>
 
 		<style>
-			/* TODO */
+			ul[role=tablist] {
+				display: flex;
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			a[role=tab] {
+				display: block;
+				padding: 1rem;
+				text-decoration: none;
+				color: black;
+			}
+
+			a[role=tab]:hover {
+				text-decoration: underline;
+			}
+
+			a[role=tab][aria-selected=true] {
+				border: 2px solid black;
+				border-bottom-width: 0;
+				background-color: white;
+				margin-bottom: -2px;
+			}
+
+			section[role=tabpanel] {
+				padding: 1rem;
+				border: 2px solid black;
+			}
 		</style>
 		<script>
 			/* TODO */
+			class NavTabs extends HTMLElement {
+				connectedCallback() {
+					this.querySelector("h2").hidden = true;
+					this.querySelectorAll("li").forEach(li => li.setAttribute("role", "presentation"));
+					this.querySelectorAll("ul").forEach(ul => ul.setAttribute("role", "tablist"));
+
+					this.tabs = [];
+
+					this.querySelectorAll("a").forEach(a => {
+						a.setAttribute("role", "tab");
+						console.log(a);
+
+						let panel = document.querySelector(`[aria-labelledby=${a.id}]`);
+						panel.setAttribute("role", "tabpanel");
+
+						let tabObject = { tab: a, panel: panel };
+						this.tabs.push(tabObject);
+
+						a.addEventListener("click", event => {
+							event.preventDefault();
+
+							this.toggleTab(this.tabs.indexOf(tabObject))
+						});
+
+						a.addEventListener("keydown", event => {
+							let currentIndex = this.tabs.indexOf(tabObject);
+
+							if (event.keyCode === 39) {
+								let index = currentIndex < this.tabs.length - 1 ? currentIndex + 1 : 0;
+								this.toggleTab(index);
+							}
+
+						})
+					});
+
+					this.toggleTab(0);
+				}
+
+				toggleTab(index) {
+					this.tabs.forEach(tab => {
+						tab.tab.removeAttribute("aria-selected");
+						tab.tab.setAttribute("tabindex", "-1");
+						tab.panel.hidden = true;
+					});
+
+					this.tabs[index].tab.setAttribute("aria-selected", "true");
+					this.tabs[index].tab.removeAttribute("tabindex");
+					this.tabs[index].panel.hidden = false;
+					this.tabs[index].tab.focus();
+				}
+			}
+			customElements.define("nav-tabs", NavTabs, { extends: "nav" });
+
+
 		</script>
 
 		<!--
