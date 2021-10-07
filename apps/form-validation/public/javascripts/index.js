@@ -67,10 +67,36 @@ class FormValidator extends HTMLFormElement {
 	addListenerForInput(input) {
 		input.addEventListener("keyup", debounce(500, event => {
 			let inputField = event.target;
+			let label = document.querySelector(`[for=${inputField.id}]`);
 
 			if (event.keyCode === 9) { // Prevent validation directly when the user tabs into the field
 				return;
 			}
+
+			fetch(this.validationUri + "?" + serializeForm(this))
+				.then(response => response.text())
+				.then(html => {
+					let dom = html2dom(html);
+
+					let newInput = dom.getElementById(inputField.id);
+					let newLabel = dom.querySelector(`[for=${newInput.id}]`);
+
+					inputField.setAttribute("aria-invalid", newInput.getAttribute("aria-invalid"));
+					label.innerHTML = newLabel.innerHTML;
+				});
+			}));
+	}
+
+	get inputs() {
+		return this.querySelectorAll("input");
+	}
+
+	get validationUri() {
+		return this.getAttribute("data-validation-uri") || this.action;
+	}
+}
+
+customElements.define("form-validator", FormValidator, { extends: 'form' });
 
 			// /* POSSIBLE SOLUTION */
 			// fetch(this.validationUri + "?" + serializeForm(inputField.closest('form')))
@@ -85,16 +111,3 @@ class FormValidator extends HTMLFormElement {
 			// 		inputField.setAttribute("aria-invalid", newInputField.getAttribute("aria-invalid"));
 			// 		replaceNode(label, newLabel);
 			// 	});
-		}));
-	}
-
-	get inputs() {
-		return this.querySelectorAll("input");
-	}
-
-	get validationUri() {
-		return this.getAttribute("data-validation-uri") || this.action;
-	}
-}
-
-customElements.define("form-validator", FormValidator, { extends: 'form' });

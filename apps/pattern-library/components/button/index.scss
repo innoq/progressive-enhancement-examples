@@ -1,4 +1,15 @@
 //  /* POSSIBLE SOLUTION */
+.button {
+	padding: 0.75rem 1.25rem;
+	background-color: lemonchiffon;
+	border: 2px solid gray;
+	border-radius: 5px;
+
+	&.primary {
+		background-color: lavender;
+	}
+}
+
 // .button {
 // 	padding: 0.75rem 1.25rem;
 // 	border: 1px solid black;
